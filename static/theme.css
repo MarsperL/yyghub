@@ -19,7 +19,9 @@
     border-bottom: 1px dotted #ddd;
     border-bottom: 1px dotted var(--grey);
 }
-
+.post:hover {
+    background-color: var(--select);
+}
 body {
     margin: 0;
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -176,13 +178,13 @@ div#filter {
     padding: 8px 12px;
     cursor: pointer;
     font-size: 14px;
-    color: var(--black);
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 #channel-options-list div:hover {
-    background-color: var(--lightgrey);
+    background-color: var(--content-bg);
+}
 }
 
 .custom-select-container.selected #channel-search {
@@ -558,6 +560,7 @@ span.tab:hover, .custom-select-container:hover {
     /* 鼠标悬停时滑块颜色变深 */
 }
 /* #############################自定义滚动条样式############################# */
+
 /* #############################返回顶部按钮样式############################# */
 .back-top-container {
   position: fixed;
@@ -649,32 +652,58 @@ span.tab:hover, .custom-select-container:hover {
 }
 /* #############################返回顶部按钮样式############################# */
 
-/* #############################今日最新标志样式############################# */
+/* #############################新的简单下拉框样式############################# */
+/* 合并后的通用样式 */
+.channel-item, .channel-category-title {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--black);
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
 
+/* 分类标题的特殊样式 */
+.channel-category-title {
+    font-weight: bold;      /* 加粗 */
+    font-size: 1.1em;       /* 加大一点 */
+    color: #FC7E11;         /* 指定的橙色 */
+    user-select: none;       /* 防止用户意外选中文字 */
+    padding: 10px 12px 5px 12px; /* 调整一下内边距 */
+}
+
+
+#channel-options-list .channel-item:hover {
+    background-color: var(--select);
+    border-radius: 3px;
+}
+
+/* "关注列表" 的特殊样式 */
+.channel-item.all-channels-item {
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 5px;
+}
+/* #############################新的简单下拉框样式############################# */
+
+/* #############################今日更新标志样式############################# */
 /* 为包含今日文章的 .post 容器设置相对定位，作为绝对定位标志的参考 */
 .post.today {
     position: relative;
 }
 
-/* 创建并样式化“今日最新”标志 */
+/* 创建并样式化“今日更新”标志 */
 .post.today::after {
-    content: '今日最新';
+    content: '今日更新';
     position: absolute;
     right: 0px;
     background-color: #FC7E11; /* 你指定的橙色 */
     color: #ffffff;           /* 白色文字 */
     padding: 5px;
-    border-radius: 0 8px 0 10px;
+    border-radius: 0 5px 0 10px;
     font-size: 12px;
     font-weight: bold;
     z-index: 10; /* 确保标志在其他内容之上 */
 }
-
-/* #############################今日最新标志样式############################# */
-
-
-
-
-
-
+/* #############################今日更新标志样式############################# */
 
