@@ -686,6 +686,29 @@ span.tab:hover, .custom-select-container:hover {
 }
 /* #############################新的简单下拉框样式############################# */
 
+/* #############################今日最新标志样式############################# */
+/* 为包含今日文章的 .post 容器设置相对定位，作为绝对定位标志的参考 */
+.post.today {
+    position: relative;
+}
+
+/* 创建并样式化“今日最新”标志 */
+.post.today::after {
+    content: '今日最新';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #FC7E11; /* 你指定的橙色 */
+    color: #ffffff;           /* 白色文字 */
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10; /* 确保标志在其他内容之上 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* 添加一点阴影使其更突出 */
+}
+/* #############################今日最新标志样式############################# */
+
 
 
 
