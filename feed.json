@@ -90,37 +90,10 @@
         "category": null
     },
     {
-        "link": "https:\/\/collabnix.com\/kubecost-3-0-is-here-a-major-architectural-shift-for-kubernetes-cost-management\/",
-        "title": "Kubecost 3.0 is Here: A Major Architectural Shift for Kubernetes Cost Management",
-        "ch": "Collabnix",
-        "date": 1763882527,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/bluehe.cn\/archives\/damingshan-mode",
         "title": "一条盘山路：把呼吸调成“大明山模式”",
         "ch": "云心怀鹤",
         "date": 1763878320,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/collabnix.com\/devsecops-guide-ci-cd-for-secure-pdf-microservices\/",
-        "title": "DevSecOps Guide: CI\/CD for Secure PDF Microservices",
-        "ch": "Collabnix",
-        "date": 1763837945,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/collabnix.com\/why-quick-play-mobile-games-are-defining-modern-downtime\/",
-        "title": "Why Quick Play Mobile Games Are Defining Modern Downtime",
-        "ch": "Collabnix",
-        "date": 1763834823,
         "image": null,
         "audio": "",
         "category": null
@@ -148,15 +121,6 @@
         "title": "iazaran\/smart-cache: Laravel SmartCache-优化大数据缓存",
         "ch": "❤️ 每天收集喜欢的开源项目",
         "date": 1763798400,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/collabnix.com\/claude-skills-transform-claude-from-a-general-purpose-ai-into-a-specialized-expert\/",
-        "title": "Claude Skills: Transform Claude from a General-Purpose AI into a Specialized Expert",
-        "ch": "Collabnix",
-        "date": 1763793470,
         "image": null,
         "audio": "",
         "category": null
@@ -252,15 +216,6 @@
         "category": null
     },
     {
-        "link": "https:\/\/collabnix.com\/ai-in-ci-cd-pipelines-automating-testing-and-deployment-with-machine-learning\/",
-        "title": "AI in CI\/CD Pipelines: Automating Testing and Deployment with Machine Learning",
-        "ch": "Collabnix",
-        "date": 1763630156,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/www.lifengdi.com\/ren-gong-zhi-neng\/4587",
         "title": "AI 编程进阶指南：从“能用”到“高效”的 10 大实战技巧（2025 版）",
         "ch": "李锋镝的博客",
@@ -297,28 +252,10 @@
         "category": null
     },
     {
-        "link": "https:\/\/collabnix.com\/transforming-employee-experience-with-ai-digital-transformation-what-engineering-teams-need-to-know\/",
-        "title": "Transforming Employee Experience with AI Digital Transformation: What Engineering Teams Need to Know",
-        "ch": "Collabnix",
-        "date": 1763617259,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/jimmysong.io\/blog\/antigravity-vscode-style-ide\/",
         "title": "把 Antigravity 用成一个更像 VS Code 的 AI IDE",
         "ch": "Jimmy Song – 博客",
         "date": 1763610934,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/collabnix.com\/the-developers-guide-to-online-privacy-without-going-off-the-grid\/",
-        "title": "The Developer’s Guide to Online Privacy (Without Going Off the Grid)",
-        "ch": "Collabnix",
-        "date": 1763609308,
         "image": null,
         "audio": "",
         "category": null
@@ -364,15 +301,6 @@
         "title": "Cachy Linux is the Fast New Linux Distro Your Home Lab Will Love",
         "ch": "Virtualization Howto",
         "date": 1763559393,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/collabnix.com\/google-gemini-3-complete-developer-guide-with-code-examples\/",
-        "title": "Google Gemini 3: Complete Developer Guide with Code Examples",
-        "ch": "Collabnix",
-        "date": 1763554819,
         "image": null,
         "audio": "",
         "category": null

@@ -1,6 +1,6 @@
 {
-  "short_name": "rsscast",
-  "name": "rsscast",
+  "short_name": "rsswe",
+  "name": "rsswe",
   "icons": [
     {
       "src": "img/apple-touch-icon.png",
@@ -23,4 +23,5 @@
   "categories": ["social", "news"]
 
 }
+
 
