@@ -664,13 +664,14 @@ span.tab:hover, .custom-select-container:hover {
     background-color: #FC7E11; /* 你指定的橙色 */
     color: #ffffff;           /* 白色文字 */
     padding: 5px;
-    border-radius: 0 5px 0 10px;
+    border-radius: 0 8px 0 10px;
     font-size: 12px;
     font-weight: bold;
     z-index: 10; /* 确保标志在其他内容之上 */
 }
 
 /* #############################今日最新标志样式############################# */
+
 
 
 
