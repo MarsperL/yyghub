@@ -10,7 +10,7 @@
     },
     {
         "link": "http:\/\/steveshuo.com\/448",
-        "title": "史蒂夫说446期 - 找不着鹿 - 这个世界的风比较大，好好保护好奇心的小火苗",
+        "title": "史蒂夫说446期 - 找不着鹿 - 这个世界风比较大，好好保护好奇心的小火苗",
         "ch": "史蒂夫说",
         "date": 1763999100,
         "image": null,
@@ -3258,24 +3258,6 @@
         "category": null
     },
     {
-        "link": "https:\/\/blog.imdst.com\/jie-jue-curl-60-peers-certificate-issuer-is-not-recognized-cuo-wu\/",
-        "title": "解决curl: (60) Peer‘s Certificate issuer is not recognized.错误",
-        "ch": "Linux运维笔记|自动化运维攻城狮",
-        "date": 1736155967,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/blog.imdst.com\/ru-he-you-ya-de-gei-docker-pei-zhi-wang-luo-dai-li\/",
-        "title": "Docker 配置网络代理的几种场景",
-        "ch": "Linux运维笔记|自动化运维攻城狮",
-        "date": 1734416646,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/www.qikqiak.com\/post\/gpustack-introduction\/",
         "title": "GPUStack：打造企业级私有大模型服务的开源利器",
         "ch": "Home on 阳明的博客",
@@ -3298,15 +3280,6 @@
         "title": "M1 Mac安装低版本Node.js",
         "ch": "Alliot's blog",
         "date": 1734001200,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/blog.imdst.com\/docker-compose-kuai-su-da-jian-ri-zhi-ping-tai\/",
-        "title": "docker-compose 快速搭建日志平台",
-        "ch": "Linux运维笔记|自动化运维攻城狮",
-        "date": 1733218490,
         "image": null,
         "audio": "",
         "category": null
@@ -3438,15 +3411,6 @@
         "category": null
     },
     {
-        "link": "https:\/\/blog.imdst.com\/faketimexiu-gai-dockerrong-qi-nei-shi-jian\/",
-        "title": "faketime修改docker容器内时间，实现游戏服务器时间的动态修改",
-        "ch": "Linux运维笔记|自动化运维攻城狮",
-        "date": 1726021679,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/haiyang.host\/archives\/ND01iMNh",
         "title": "Linux压缩图片",
         "ch": "Linux运维笔记",
@@ -3487,15 +3451,6 @@
         "title": "群晖Nas折腾失败手记[已成功解决]",
         "ch": "东评西就",
         "date": 1724334044,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/blog.imdst.com\/nginx-certbotshen-qing-mian-fei-sslzheng-shu-bing-zi-dong-xu-qian\/",
-        "title": "nginx+certbot申请免费ssl证书并自动续签",
-        "ch": "Linux运维笔记|自动化运维攻城狮",
-        "date": 1724135096,
         "image": null,
         "audio": "",
         "category": null
@@ -3636,15 +3591,6 @@
         "category": null
     },
     {
-        "link": "https:\/\/blog.imdst.com\/shell-ru-he-chu-li-dai-you-kong-ge-de-wen-jian-ming\/",
-        "title": "shell 如何处理带有空格的文件名",
-        "ch": "Linux运维笔记|自动化运维攻城狮",
-        "date": 1721384187,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/icloudnative.io\/posts\/best-ai-translation-workflow\/",
         "title": "最佳 AI 翻译工作流：全世界最信达雅的翻译",
         "ch": "云原生实验室",
@@ -3667,15 +3613,6 @@
         "title": "BMPI周记006：时光机",
         "ch": "BMPI",
         "date": 1720396800,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/blog.imdst.com\/dev-sdb-ti-shi-device-dev-sdb-excluded-by-a-filterjie-jue-ban-fa\/",
-        "title": "\/dev\/sdb 提示 Device \/dev\/sdb excluded by a filter解决办法",
-        "ch": "Linux运维笔记|自动化运维攻城狮",
-        "date": 1720002270,
         "image": null,
         "audio": "",
         "category": null
@@ -3712,15 +3649,6 @@
         "title": "BMPI周记005：直播小完结",
         "ch": "BMPI",
         "date": 1719014400,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/blog.imdst.com\/centos7bian-yi-an-zhuang-cmake3\/",
-        "title": "centos7编译安装cmake3",
-        "ch": "Linux运维笔记|自动化运维攻城狮",
-        "date": 1718244240,
         "image": null,
         "audio": "",
         "category": null
