@@ -1,5 +1,14 @@
 [
     {
+        "link": "https:\/\/www.lifengdi.com\/ren-gong-zhi-neng\/4591",
+        "title": "AI 智能体构建全景指南：九大核心技术深度拆解与落地实战",
+        "ch": "李锋镝的博客",
+        "date": 1764033011,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
         "link": "https:\/\/wiki.eryajf.net\/pages\/9a8000\/",
         "title": "整理一些我的运维常用利器，一定有你用得上的",
         "ch": "二丫讲梵",
@@ -436,15 +445,6 @@
         "title": "从零开发 MCP 协议工具：从原理到实战的完整指南（Python 版）",
         "ch": "李锋镝的博客",
         "date": 1763449729,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/www.lifengdi.com\/ren-gong-zhi-neng\/4581",
-        "title": "工程师专属 AI 自学路线：从入门到实战，避开90%的坑（2025 最新版）",
-        "ch": "李锋镝的博客",
-        "date": 1763432235,
         "image": null,
         "audio": "",
         "category": null
@@ -1215,15 +1215,6 @@
         "category": null
     },
     {
-        "link": "https:\/\/www.txisfine.cn\/archives\/53ca3119.html",
-        "title": "免费国密的SSL证书支持所有浏览器信任 —— 证签SSL",
-        "ch": "弹霄博科",
-        "date": 1761148077,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/www.xiaoyuzhoufm.com\/episode\/68f8e3bd01567203219237b0?utm_source=rss",
         "title": "EP32 听友来信：比回避型更难搞的是矛盾型伴侣！二者如何区分？",
         "ch": "暗送秋波",
@@ -1247,15 +1238,6 @@
         "ch": "杜老师说",
         "date": 1761062400,
         "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/www.txisfine.cn\/archives\/4a1d6780.html",
-        "title": "龙芯久久派 JTAG 刷 U-BOOT\/PMON",
-        "ch": "弹霄博科",
-        "date": 1761061355,
-        "image": "https:\/\/static.txisfine.cn\/upload\/20251022000312.png\/pk_watermark",
         "audio": "",
         "category": null
     },
@@ -2286,19 +2268,19 @@
         "category": null
     },
     {
-        "link": "https:\/\/www.txisfine.cn\/archives\/d6fbb673.html",
-        "title": "在 CNB.COOL 构建龙芯平台 Docker 镜像",
-        "ch": "弹霄博科",
-        "date": 1753284898,
-        "image": "https:\/\/static.txisfine.cn\/upload\/20250723235738.png\/pk_watermark",
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/nops.icu\/archives\/218\/",
         "title": "AIOps提效--风格化报表自动生成",
         "ch": "Ops doesn't need to work overtime~",
         "date": 1753255500,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/lostdeer.xyz\/the-lychee-road\/",
+        "title": "《长安的荔枝》简评",
+        "ch": "迷鹿屋",
+        "date": 1753005488,
         "image": null,
         "audio": "",
         "category": null
@@ -2547,15 +2529,6 @@
         "category": null
     },
     {
-        "link": "https:\/\/www.txisfine.cn\/archives\/a6cede2d.html",
-        "title": "我们托管了一台龙芯 3C6000\/S 服务器",
-        "ch": "弹霄博科",
-        "date": 1750912218,
-        "image": "https:\/\/static.txisfine.cn\/upload\/Snipaste_2025-06-26_13-13-08.jpg\/pk_watermark",
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/feisky.xyz\/posts\/2025-06-26-google-free-gemini-cli\/",
         "title": "谷歌发布开源免费命令行编程工具 Gemini CLI",
         "ch": "Feisky",
@@ -2578,6 +2551,15 @@
         "title": "构建稳定的 CAN 网络通信桥梁：CAN-Bridge",
         "ch": "Rss Feed - 苏洋博客",
         "date": 1750826940,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/www.iots.vip\/post\/argocd-metadata-annotations-Toolong",
+        "title": "ArgoCD部署应用出现metadata.annotations过大问题",
+        "ch": "Alliot's blog",
+        "date": 1750764112,
         "image": null,
         "audio": "",
         "category": null
@@ -2686,6 +2668,15 @@
         "title": "2025年5月阅读书摘",
         "ch": "Dennis",
         "date": 1749349333,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/lostdeer.xyz\/shinanzhitu\/",
+        "title": "《食南之徒》简评",
+        "ch": "迷鹿屋",
+        "date": 1749292420,
         "image": null,
         "audio": "",
         "category": null
@@ -2835,24 +2826,6 @@
         "category": null
     },
     {
-        "link": "https:\/\/www.txisfine.cn\/archives\/aeccbd15.html",
-        "title": "NGINX 中诡计多端的 IF",
-        "ch": "弹霄博科",
-        "date": 1747546635,
-        "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/www.txisfine.cn\/archives\/e36d6fd5.html",
-        "title": "从 SC-081 说说 SSL 证书的那些事",
-        "ch": "弹霄博科",
-        "date": 1747498097,
-        "image": "https:\/\/static.txisfine.cn\/upload\/20250519002924.png\/pk_watermark",
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/www.mintimate.cn\/2025\/05\/17\/mysqlMigrationByDumper\/",
         "title": "MySQL 数据库如何使用 mydumper 和 myloader 数据快速备份和迁移",
         "ch": "雨月空间站",
@@ -2894,6 +2867,15 @@
         "ch": "运维小弟",
         "date": 1746805473,
         "image": "https:\/\/srebro.cn\/plugins\/feed\/assets\/telemetry.gif?title=%E6%9E%84%E5%BB%BA%20PostGIS%20%E4%B8%8E%20pgRouting%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%EF%BC%9A%E6%89%93%E9%80%A0%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90&amp;url=\/archives\/1746805396253",
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/lostdeer.xyz\/the-road-of-baking\/",
+        "title": "烘焙之路",
+        "ch": "迷鹿屋",
+        "date": 1746713231,
+        "image": null,
         "audio": "",
         "category": null
     },
@@ -2979,11 +2961,29 @@
         "category": null
     },
     {
+        "link": "https:\/\/lostdeer.xyz\/baking-note\/",
+        "title": "烘焙系统入门简易攻略（2025版）",
+        "ch": "迷鹿屋",
+        "date": 1745653123,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
         "link": "https:\/\/srebro.cn\/archives\/1745596430631",
         "title": "Nginx 中页面配置用户名密码认证",
         "ch": "运维小弟",
         "date": 1745596465,
         "image": "https:\/\/srebro.cn\/plugins\/feed\/assets\/telemetry.gif?title=Nginx%20%E4%B8%AD%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81%E8%AE%A4%E8%AF%81&amp;url=\/archives\/1745596430631",
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/lostdeer.xyz\/gossip250419\/",
+        "title": "平淡的一周，摸鱼读了点书。",
+        "ch": "迷鹿屋",
+        "date": 1744996094,
+        "image": null,
         "audio": "",
         "category": null
     },
@@ -3029,15 +3029,6 @@
         "ch": "Rss Feed - 苏洋博客",
         "date": 1743934560,
         "image": null,
-        "audio": "",
-        "category": null
-    },
-    {
-        "link": "https:\/\/www.txisfine.cn\/archives\/fcd1738c.html",
-        "title": "MCP Server 牛刀小试之雷池 MCP",
-        "ch": "弹霄博科",
-        "date": 1743432206,
-        "image": "https:\/\/static.txisfine.cn\/upload\/20250331235805.png\/pk_watermark",
         "audio": "",
         "category": null
     },
@@ -3114,6 +3105,15 @@
         "category": null
     },
     {
+        "link": "https:\/\/lostdeer.xyz\/artwork-and-periodization\/",
+        "title": "艺术作品，与时代性",
+        "ch": "迷鹿屋",
+        "date": 1742718799,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
         "link": "https:\/\/yeshu.cloud\/posts\/newsletter-134\/",
         "title": "小树学装修 - Mesh 组网",
         "ch": "一颗小树",
@@ -3141,15 +3141,6 @@
         "category": null
     },
     {
-        "link": "https:\/\/www.txisfine.cn\/archives\/9d7104b2.html",
-        "title": "移植 HUSTOJ judge_clinet 到 LoongArch64",
-        "ch": "弹霄博科",
-        "date": 1740927839,
-        "image": "https:\/\/static.txisfine.cn\/upload\/20250303224029.png\/pk_watermark",
-        "audio": "",
-        "category": null
-    },
-    {
         "link": "https:\/\/yeshu.cloud\/posts\/newsletter-133\/",
         "title": "为什么忙起来就没有表达欲？",
         "ch": "一颗小树",
@@ -3172,6 +3163,15 @@
         "title": "昆明风光好",
         "ch": "一颗小树",
         "date": 1740311760,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/lostdeer.xyz\/sculpting-in-time\/",
+        "title": "《雕刻时光》笔记",
+        "ch": "迷鹿屋",
+        "date": 1740302768,
         "image": null,
         "audio": "",
         "category": null
@@ -3213,6 +3213,15 @@
         "category": null
     },
     {
+        "link": "https:\/\/www.iots.vip\/post\/apc-ups-replace-battery",
+        "title": "APC UPS更换电池校准容量",
+        "ch": "Alliot's blog",
+        "date": 1739185200,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
         "link": "https:\/\/www.ioiox.com\/archives\/172.html",
         "title": "Sink - 免费部署在 Cloudflare Pages 上的超好用的短链接服务",
         "ch": "思有云 - IOIOX",
@@ -3226,6 +3235,15 @@
         "title": "Linux系统挂载FTP服务文件目录",
         "ch": "柒's Blog",
         "date": 1737339060,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/lostdeer.xyz\/herstory\/",
+        "title": "《好东西》感想",
+        "ch": "迷鹿屋",
+        "date": 1737298905,
         "image": null,
         "audio": "",
         "category": null
@@ -3276,10 +3294,28 @@
         "category": null
     },
     {
+        "link": "https:\/\/www.iots.vip\/post\/installing-lower-version-nodejs-on-m1-mac",
+        "title": "M1 Mac安装低版本Node.js",
+        "ch": "Alliot's blog",
+        "date": 1734001200,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
         "link": "https:\/\/blog.imdst.com\/docker-compose-kuai-su-da-jian-ri-zhi-ping-tai\/",
         "title": "docker-compose 快速搭建日志平台",
         "ch": "Linux运维笔记|自动化运维攻城狮",
         "date": 1733218490,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/www.iots.vip\/post\/ansible-vault-bitwarden-integration",
+        "title": "Ansible使用Bitwarden存储Vault密码",
+        "ch": "Alliot's blog",
+        "date": 1732434127,
         "image": null,
         "audio": "",
         "category": null
@@ -3434,6 +3470,15 @@
         "ch": "TinkerTry",
         "date": 1725281100,
         "image": "https:\/\/tinkertry.com\/content\/articles\/1178-going-to-everything-electric-canada\/featured.png",
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/www.iots.vip\/post\/cloudflare-tunnel-proxy-support",
+        "title": "Cloudflare Tunnel前置代理支持",
+        "ch": "Alliot's blog",
+        "date": 1725188400,
+        "image": null,
         "audio": "",
         "category": null
     },
@@ -3654,6 +3699,15 @@
         "category": null
     },
     {
+        "link": "https:\/\/www.iots.vip\/post\/configuration-vaultwarden-enable-fail2ban-over-cdn",
+        "title": "CDN场景下配置Vaultwarden启用fail2ban",
+        "ch": "Alliot's blog",
+        "date": 1719285412,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
         "link": "https:\/\/www.bmpi.dev\/weeklies\/20240622\/",
         "title": "BMPI周记005：直播小完结",
         "ch": "BMPI",
@@ -3685,6 +3739,15 @@
         "title": "VeeamOn 24 – Day 1 Keynote Announcements",
         "ch": "Ready, Set, Virtual!",
         "date": 1717597432,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/www.iots.vip\/post\/summary-of-smooth-account-opening-in-boc-hong-kong",
+        "title": "中银香港丝滑开户总结",
+        "ch": "Alliot's blog",
+        "date": 1716616800,
         "image": null,
         "audio": "",
         "category": null
@@ -3753,6 +3816,15 @@
         "category": null
     },
     {
+        "link": "https:\/\/www.iots.vip\/post\/update-safeline-ssl-cert-from-file",
+        "title": "从指定路径更新雷池WAF证书",
+        "ch": "Alliot's blog",
+        "date": 1712044216,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
         "link": "https:\/\/tinkertry.com\/articles\/tesla-solar-roof-compared-with-solar-panels",
         "title": "Solar Roof vs Solar Panels: Which is Worth It? - TinkerTry's home featured in Matt Ferrell's video and podcast",
         "ch": "TinkerTry",
@@ -3766,6 +3838,24 @@
         "title": "Different Perspective of Line Regression",
         "ch": "Pandalab",
         "date": 1710753576,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/xlog.app\/api\/redirection?characterId=10&noteId=2532",
+        "title": "一个六岁开源项目的崩溃与新生",
+        "ch": "Hi, DIYgod",
+        "date": 1710098945,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/xlog.app\/api\/redirection?characterId=10&noteId=2510",
+        "title": "和帕鲁生活在一起的两周",
+        "ch": "Hi, DIYgod",
+        "date": 1708284033,
         "image": null,
         "audio": "",
         "category": null
@@ -3785,6 +3875,15 @@
         "ch": "TinkerTry",
         "date": 1706781480,
         "image": "https:\/\/tinkertry.com\/content\/articles\/1176-getting-to-know-matt-ferrell\/featured.jpg",
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/xlog.app\/api\/redirection?characterId=10&noteId=2456",
+        "title": "Twitter 对开源项目发起 DDoS 攻击",
+        "ch": "Hi, DIYgod",
+        "date": 1706437493,
+        "image": null,
         "audio": "",
         "category": null
     },
@@ -3820,6 +3919,15 @@
         "title": "Updating Veeam Backup for Microsoft 365 v7",
         "ch": "Ready, Set, Virtual!",
         "date": 1705735073,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/xlog.app\/api\/redirection?characterId=10&noteId=2434",
+        "title": "如何优雅编译一个 Markdown 文档",
+        "ch": "Hi, DIYgod",
+        "date": 1705582237,
         "image": null,
         "audio": "",
         "category": null
@@ -3870,10 +3978,28 @@
         "category": null
     },
     {
+        "link": "https:\/\/xlog.app\/api\/redirection?characterId=10&noteId=2358",
+        "title": "2023 平稳过渡",
+        "ch": "Hi, DIYgod",
+        "date": 1704723798,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
         "link": "https:\/\/www.ioiox.com\/archives\/170.html",
         "title": "香港两日行 - 汇丰香港 招商永隆 福途牛牛 快速办卡经验分享",
         "ch": "思有云 - IOIOX",
         "date": 1703663640,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/xlog.app\/api\/redirection?characterId=10&noteId=2292",
+        "title": "轻松创建一万个 Twitter 账号",
+        "ch": "Hi, DIYgod",
+        "date": 1702635286,
         "image": null,
         "audio": "",
         "category": null
@@ -4000,6 +4126,24 @@
         "title": "VMware Cloud on AWS: VPC Peering Enables Cost-Efficient External Storage",
         "ch": "Ather Beg's Useful Thoughts",
         "date": 1692713119,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/xlog.app\/api\/redirection?characterId=10&noteId=2022",
+        "title": "优雅使用 Cloudflare WARP 应对  RSSHub 反爬难题",
+        "ch": "Hi, DIYgod",
+        "date": 1692309711,
+        "image": null,
+        "audio": "",
+        "category": null
+    },
+    {
+        "link": "https:\/\/xlog.app\/api\/redirection?characterId=10&noteId=1957",
+        "title": "在博客融入一个跨平台作品集",
+        "ch": "Hi, DIYgod",
+        "date": 1691447658,
         "image": null,
         "audio": "",
         "category": null
