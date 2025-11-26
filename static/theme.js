@@ -422,197 +422,38 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-// JS部分修改建议
-document.addEventListener('DOMContentLoaded', function () {
-    let allPosts = [];
-    let displayedCount = 20; // 初始已显示数量
-    const batchSize = 20;    // 每次加载条数
-    let isLoading = false;   // 防止重复点击
+document.addEventListener('DOMContentLoaded', function() {
+    // 所有播放按钮
+    document.querySelectorAll('.audio button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const aid = this.dataset.aid;
+            const audioEl = document.querySelector(`audio[aid="${aid}"]`);
+            if (!audioEl) return;
 
-    // 1. 加载全部文章数据
-    fetch('feed.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('网络响应不正常');
-            }
-            return response.json();
-        })
-        .then(data => {
-            allPosts = data;
-            const loadMoreContainer = document.getElementById('load-more-container');
-            if (loadMoreContainer && allPosts.length <= 20) {
-                loadMoreContainer.style.display = 'none';
-            }
-        })
-        .catch(err => {
-            console.error('无法加载 feed.json:', err);
-            // 可以在这里添加用户友好的错误提示
-            const errorMsg = document.createElement('div');
-            errorMsg.className = 'error-message';
-            errorMsg.textContent = '加载文章失败，请刷新页面重试';
-            document.getElementById('wrap').appendChild(errorMsg);
-        });
-
-    // 2. 格式化日期：Y-n-j（无前导零）
-    function formatDate(timestamp) {
-        const d = new Date(timestamp * 1000);
-        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-    }
-
-    // 3. 渲染一批文章（从 start 到 end）
-    function renderPosts(start, end) {
-        const wrap = document.getElementById('wrap');
-        const loadMoreContainer = document.getElementById('load-more-container');
-        if (!wrap || !loadMoreContainer || isLoading) return;
-
-        isLoading = true;
-        const loadMoreBtn = document.getElementById('load-more-btn');
-        if (loadMoreBtn) {
-            loadMoreBtn.textContent = '加载中...';
-            loadMoreBtn.disabled = true;
-        }
-
-        const fragment = document.createDocumentFragment();
-        let audioIndexOffset = document.querySelectorAll('#wrap audio').length;
-
-        for (let i = start; i < Math.min(end, allPosts.length); i++) {
-            const post = allPosts[i];
-            const isAudio = !!post.audio;
-            // 使用与PHP一致的日期判断
-            const todayTimestamp = Math.floor(new Date().setHours(0,0,0,0) / 1000);
-            const isToday = post.date >= todayTimestamp;
-            const todayClass = isToday ? ' today' : '';
-
-            const postDiv = document.createElement('div');
-            postDiv.className = 'post' + todayClass;
-            postDiv.dataset.channel = post.ch || '';
-            postDiv.dataset.category = post.category || '';
-            postDiv.dataset.ts = post.date;
-            postDiv.dataset.audio = isAudio ? '1' : '0';
-
-            // 左侧图片区域
-            const leftPan = document.createElement('div');
-            leftPan.className = 'leftpan';
-            const img = document.createElement('img');
-            img.loading = 'lazy';
-            
-            if (post.image) {
-                img.src = post.image;
-                img.onerror = function() {
-                    this.onerror = null;
-                    this.src = '/yyghub/img/loading.gif';
-                };
-            } else {
-                try {
-                    const domain = new URL(post.link).hostname;
-                    img.src = `https://toolb.cn/favicon/${encodeURIComponent(domain)}`;
-                    img.onerror = function() {
-                        this.onerror = null;
-                        this.src = '/yyghub/img/loading.gif';
-                    };
-                } catch (e) {
-                    img.src = '/yyghub/img/loading.gif';
+            // 查找当前正在播放的其他音频并暂停
+            document.querySelectorAll('audio').forEach(a => {
+                if (a !== audioEl && !a.paused) {
+                    a.pause();
+                    const otherBtn = document.querySelector(`button[data-aid="${a.getAttribute('aid')}"]`);
+                    if (otherBtn) otherBtn.textContent = 'Play';
                 }
-            }
-            leftPan.appendChild(img);
+            });
 
-            // 右侧内容区域
-            const rightPan = document.createElement('div');
-            rightPan.className = 'rightpan';
-
-            const feedName = document.createElement('div');
-            feedName.className = 'feedname';
-            feedName.innerHTML = `<span class="channel">${post.ch || ''}</span> &bull; <span class="date">${formatDate(post.date)}</span>`;
-
-            const h2 = document.createElement('h2');
-            const a = document.createElement('a');
-            a.href = post.link;
-            a.target = '_blank';
-            a.textContent = post.title || '无标题';
-            h2.appendChild(a);
-
-            rightPan.appendChild(feedName);
-            rightPan.appendChild(h2);
-
-            // 音频部分
-            if (isAudio) {
-                const audioDiv = document.createElement('div');
-                audioDiv.className = 'audio';
-                const btn = document.createElement('button');
-                btn.className = 'play-btn';
-                btn.dataset.aid = audioIndexOffset;
-                btn.textContent = 'Play';
-                const audio = document.createElement('audio');
-                audio.src = post.audio;
-                audio.preload = 'none';
-                audio.dataset.aid = audioIndexOffset;
-                audioIndexOffset++;
-
-                audioDiv.appendChild(btn);
-                audioDiv.appendChild(audio);
-                rightPan.appendChild(audioDiv);
-            }
-
-            postDiv.appendChild(leftPan);
-            postDiv.appendChild(rightPan);
-            fragment.appendChild(postDiv);
-        }
-
-        // 插入到 #load-more-container 之前
-        wrap.insertBefore(fragment, loadMoreContainer);
-
-        // 重置加载状态
-        isLoading = false;
-        if (loadMoreBtn) {
-            loadMoreBtn.textContent = '加载更多';
-            loadMoreBtn.disabled = false;
-        }
-
-        // 如果所有文章都已加载，隐藏加载按钮
-        if (displayedCount >= allPosts.length) {
-            if (loadMoreContainer) {
-                loadMoreContainer.style.display = 'none';
-            }
-        }
-    }
-
-    // 4. 使用事件委托处理播放按钮点击
-    document.getElementById('wrap').addEventListener('click', function(e) {
-        if (e.target.classList.contains('play-btn')) {
-            const aid = e.target.dataset.aid;
-            const audio = document.querySelector(`audio[data-aid="${aid}"]`);
-            if (audio) {
-                // 暂停所有其他音频
-                document.querySelectorAll('audio').forEach(a => {
-                    if (a !== audio && !a.paused) {
-                        a.pause();
-                        const otherBtn = document.querySelector(`.play-btn[data-aid="${a.dataset.aid}"]`);
-                        if (otherBtn) otherBtn.textContent = 'Play';
-                    }
+            // 切换播放/暂停
+            if (audioEl.paused) {
+                // 首次点击才设置 preload=auto，避免预加载
+                audioEl.setAttribute('preload', 'metadata');
+                audioEl.style.display = 'inline-block'; // 显示 controls
+                audioEl.play().catch(e => {
+                    console.warn('播放被阻止:', e);
+                    this.textContent = 'Play (点击后允许)';
                 });
-                
-                if (audio.paused) {
-                    audio.load();
-                    audio.play().catch(err => console.warn('播放被阻止或失败:', err));
-                    e.target.textContent = 'Pause';
-                } else {
-                    audio.pause();
-                    e.target.textContent = 'Play';
-                }
-            }
-        }
-    });
-
-    // 5. "加载更多"按钮逻辑
-    const loadMoreBtn = document.getElementById('load-more-btn');
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function () {
-            if (!isLoading) {
-                const nextStart = displayedCount;
-                const nextEnd = displayedCount + batchSize;
-                renderPosts(nextStart, nextEnd);
-                displayedCount = nextEnd;
+                this.textContent = 'Pause';
+            } else {
+                audioEl.pause();
+                this.textContent = 'Play';
             }
         });
-    }
+    });
 });
+
