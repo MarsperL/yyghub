@@ -1,1 +1,422 @@
-document.addEventListener("DOMContentLoaded",async()=>{const e=document.querySelectorAll(".tab"),t=document.querySelectorAll(".post"),n=document.getElementById("channel-search"),a=document.getElementById("channel-options-list"),o=document.getElementById("channel-items");let s="全部",i=[];function c(e=""){if(o){if(o.innerHTML="",""===e){const e=document.createElement("div");e.className="channel-item all-channels-item",e.textContent="关注列表",e.addEventListener("click",()=>l({value:"全部",text:"关注列表"})),o.appendChild(e)}for(const t in i){const n=i[t];if(!Array.isArray(n))continue;const a=document.createElement("div");a.className="channel-category-title",a.textContent=t,o.appendChild(a),n.forEach(t=>{if(t.toLowerCase().includes(e.toLowerCase())){const e=document.createElement("div");e.className="channel-item",e.textContent=t,e.addEventListener("click",()=>l({value:t,text:t})),o.appendChild(e)}})}}}function l(o){s=o.value,n.value=o.text,a&&(a.style.display="none"),t.forEach(e=>{const t=e.getAttribute("data-channel");e.style.display="全部"===s||t===s?"block":"none"}),e.forEach(e=>e.classList.remove("active"));const i=document.querySelector(".custom-select-container");i&&i.classList.add("selected")}e.forEach(a=>{a.addEventListener("click",()=>{e.forEach(e=>e.classList.remove("active")),a.classList.add("active");const o=a.textContent.trim();t.forEach(e=>{const t=parseInt(e.getAttribute("data-audio"));e.style.display="全部"===o||"文章"===o&&0===t||"播客"===o&&1===t?"block":"none"}),s="全部",n&&(n.value="关注列表");const i=document.querySelector(".custom-select-container");i&&i.classList.remove("selected")})}),n&&(n.addEventListener("focus",()=>{c(),a&&(a.style.display="block")}),n.addEventListener("input",e=>{c(e.target.value),a&&(a.style.display="block")})),document.addEventListener("click",e=>{e.target.closest(".custom-select-container")||a&&(a.style.display="none")}),await async function(){try{const e=await fetch("channels.json");if(!e.ok)throw new Error("Failed to load channels.json");i=await e.json(),console.log("Channels with names data loaded:",i)}catch(e){console.error("Error initializing channels:",e),o&&(o.innerHTML='<div class="channel-item">加载频道失败</div>')}}(),c(),l({value:"全部",text:"关注列表"});const r=document.querySelectorAll(".audio button[data-aid]");let d=null,u=null;const m=document.querySelector("#floating_player #playpausebutton"),y=document.querySelector("#seekbar"),v=document.getElementById("close_player"),p=document.querySelector("#floating_player");function g(){d&&d.paused?d.play():d&&d.pause()}v&&v.addEventListener("click",function(){p&&(p.classList.remove("show"),setTimeout(()=>{p.style.display="none"},300)),document.querySelectorAll(".post.nowplaying").forEach(e=>e.classList.remove("nowplaying"))}),m&&m.addEventListener("click",function(){g()}),y&&y.addEventListener("input",function(e){if(!d)return;const t=y.value/100*d.duration;d.currentTime=t});const f=[1,1.2,1.5,1.75,2];let h=0;const E=document.getElementById("speed");E&&E.addEventListener("click",()=>{if(!d)return;h=(h+1)%f.length;const e=f[h];d.playbackRate=e,E.innerText=e+"x",q()});const L=document.getElementById("plus30");function k(){if(!d)return;const e=d.currentTime;document.getElementById("current_time").textContent=b(e),document.getElementById("duration").textContent=b(d.duration);const t=e/d.duration*100;y&&(y.value=t)}function S(){"mediaSession"in navigator&&(navigator.mediaSession.playbackState="playing"),m&&m.classList.add("playing"),u&&u.classList.add("playing"),q()}function w(){"mediaSession"in navigator&&(navigator.mediaSession.playbackState="paused"),m&&m.classList.remove("playing"),u&&u.classList.remove("playing"),q()}function b(e){if(isNaN(e))return"00:00";const t=Math.floor(e/60),n=Math.floor(e%60);return("0"+t).slice(-2)+":"+("0"+n).slice(-2)}function A(e){const t=u;u=document.querySelector('[data-aid="'+e.getAttribute("aid")+'"]');e.getAttribute("src");d&&d!==e?(d.pause(),d.removeEventListener("timeupdate",k),d.removeEventListener("play",S),d.removeEventListener("pause",w),t&&t.classList.remove("playing"),m&&m.classList.remove("playing"),y&&(y.value="0"),e.readyState>=1?x(e):e.addEventListener("loadedmetadata",()=>x(e),{once:!0})):d?g():e.readyState>=1?x(e):e.addEventListener("loadedmetadata",()=>x(e),{once:!0})}function q(){"mediaSession"in navigator&&d&&navigator.mediaSession.setPositionState({duration:d.duration,playbackRate:d.playbackRate,position:d.currentTime})}function x(e){const t=e.closest(".post");document.querySelectorAll(".post.nowplaying").forEach(e=>e.classList.remove("nowplaying")),t.classList.add("nowplaying");const n=t.querySelector("h2").textContent,a=document.getElementById("title");a&&(a.innerHTML=n),d=e,d.addEventListener("timeupdate",k),d.addEventListener("play",S),d.addEventListener("pause",w);const o=document.getElementById("duration");if(o&&(o.textContent=b(d.duration)),p&&(p.style.display="block",setTimeout(()=>{p.classList.add("show")},10)),d.play(),E&&(E.innerText=d.playbackRate+"x"),"mediaSession"in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:n,artist:t.querySelector(".channel").textContent,album:"rssTea",artwork:[{src:t.querySelector("img").src}]});const a=document.querySelectorAll("[data-aid]").length;let o=Math.floor(e.getAttribute("aid"))+1,s=Math.floor(e.getAttribute("aid"))-1;o>a-1&&(o=0),s<0&&(s=a-1),navigator.mediaSession.setActionHandler("play",()=>d.play()),navigator.mediaSession.setActionHandler("pause",()=>d.pause()),navigator.mediaSession.setActionHandler("nexttrack",()=>A(document.querySelector('[aid="'+o+'"]'))),navigator.mediaSession.setActionHandler("previoustrack",()=>A(document.querySelector('[aid="'+s+'"]'))),navigator.mediaSession.setActionHandler("seekbackward",e=>{d.currentTime=d.currentTime-(e.seekOffset||10),q()}),navigator.mediaSession.setActionHandler("seekforward",e=>{d.currentTime=d.currentTime+(e.seekOffset||10),q()})}}L&&L.addEventListener("click",()=>{d&&(d.currentTime+=30)}),r.forEach(function(e){e.addEventListener("click",function(){const e=this.getAttribute("data-aid");A(document.querySelector('audio[aid="'+e+'"]'))})});const T=document.getElementById("back-top-container"),C=document.getElementById("back-top-main"),I=document.getElementById("progress-ring-circle");if(T&&C&&I){const e=42,t=2*Math.PI*e;I.style.strokeDasharray=`${t}`,I.style.strokeDashoffset=t;const n=()=>window.scrollTo({top:0,behavior:"smooth"});const a=()=>{const{scrollY:e,innerHeight:n}=window,{scrollHeight:a}=document.documentElement,o=a-n;if(o<=0)return void(I.style.strokeDashoffset=t);const s=Math.min(e/o,1),i=t-s*t;I.style.strokeDashoffset=i},o=function(e,t=50){let n=null;return function(...a){n||(n=setTimeout(()=>{e.apply(this,a),n=null},t))}}(()=>{window.scrollY>100?T.classList.add("show"):T.classList.remove("show"),a()});C.addEventListener("click",n),window.addEventListener("scroll",o),o()}});
+document.addEventListener('DOMContentLoaded', async () => {
+
+    // =================================================================
+    // 1. 变量与DOM元素定义
+    // =================================================================
+    const tabs = document.querySelectorAll('.tab');
+    const posts = document.querySelectorAll('.post');
+    const channelSearchInput = document.getElementById('channel-search');
+    const channelOptionsList = document.getElementById('channel-options-list');
+    const channelItemsContainer = document.getElementById('channel-items');
+
+    let selectedChannel = '全部';
+    let allChannelsData = []; // 存储从 channels.json 加载的分类数据
+
+    // =================================================================
+    // 2. 频道下拉框逻辑
+    // =================================================================
+
+    /**
+     * 从 channels.json 加载频道数据
+     */
+    async function initializeChannels() {
+        try {
+            // 加载新的JSON文件
+            const response = await fetch('channels.json');
+            if (!response.ok) throw new Error('Failed to load channels.json');
+            allChannelsData = await response.json();
+            console.log("Channels with names data loaded:", allChannelsData);
+        } catch (error) {
+            console.error('Error initializing channels:', error);
+            if (channelItemsContainer) {
+                channelItemsContainer.innerHTML = '<div class="channel-item">加载频道失败</div>';
+            }
+        }
+    }
+
+    /**
+     * 渲染一个简单的、不折叠的分类和频道列表
+     */
+    function renderCategoriesAndItems(searchTerm = '') {
+        if (!channelItemsContainer) return;
+        channelItemsContainer.innerHTML = '';
+
+        // 1. 渲染 "All" 选项
+        if (searchTerm === '') {
+            const allItem = document.createElement('div');
+            allItem.className = 'channel-item all-channels-item';
+            allItem.textContent = '关注列表';
+            allItem.addEventListener('click', () => selectChannel({
+                value: '全部',
+                text: '关注列表'
+            }));
+            channelItemsContainer.appendChild(allItem);
+        }
+
+        // 2. 遍历分类并渲染
+        for (const categoryName in allChannelsData) {
+            const channelNames = allChannelsData[categoryName];
+            if (!Array.isArray(channelNames)) continue;
+
+            // 渲染分类标题
+            const categoryTitle = document.createElement('div');
+            categoryTitle.className = 'channel-category-title';
+            categoryTitle.textContent = categoryName;
+            channelItemsContainer.appendChild(categoryTitle);
+
+            // 渲染该分类下的频道
+            channelNames.forEach(channelName => {
+                if (channelName.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    const item = document.createElement('div');
+                    item.className = 'channel-item';
+                    // 现在显示的是人类可读的频道名
+                    item.textContent = channelName;
+                    // selectChannel 现在也使用频道名作为 value
+                    item.addEventListener('click', () => selectChannel({
+                        value: channelName,
+                        text: channelName
+                    }));
+                    channelItemsContainer.appendChild(item);
+                }
+            });
+        }
+    }
+
+    function selectChannel(channel) {
+        // selectedChannel 现在存储频道名
+        selectedChannel = channel.value;
+        channelSearchInput.value = channel.text;
+        if (channelOptionsList) channelOptionsList.style.display = 'none';
+        filterPostsByChannel();
+
+        tabs.forEach(tab => tab.classList.remove('active'));
+        const customSelectContainer = document.querySelector('.custom-select-container');
+        if (customSelectContainer) customSelectContainer.classList.add('selected');
+    }
+
+    /**
+     * 根据选择的频道过滤文章
+     * 【核心修改】现在我们比较的是频道名
+     */
+    function filterPostsByChannel() {
+        posts.forEach(post => {
+            // 从HTML的 data-channel 属性获取频道名
+            const channelName = post.getAttribute('data-channel');
+
+            if (selectedChannel === '全部' || channelName === selectedChannel) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+    }
+
+    // =================================================================
+    // 3. Tab 切换逻辑
+    // =================================================================
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const filter = tab.textContent.trim();
+            posts.forEach(post => {
+                const audio = parseInt(post.getAttribute('data-audio'));
+                if (filter === '全部' || (filter === '文章' && audio === 0) || (filter === '播客' && audio === 1)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+
+            // 重置频道选择器
+            selectedChannel = '全部';
+            if (channelSearchInput) channelSearchInput.value = '关注列表';
+            const customSelectContainer = document.querySelector('.custom-select-container');
+            if (customSelectContainer) customSelectContainer.classList.remove('selected');
+        });
+    });
+
+    // =================================================================
+    // 4. 事件监听
+    // =================================================================
+    if (channelSearchInput) {
+        channelSearchInput.addEventListener('focus', () => {
+            renderCategoriesAndItems();
+            if (channelOptionsList) channelOptionsList.style.display = 'block';
+        });
+        channelSearchInput.addEventListener('input', (e) => {
+            renderCategoriesAndItems(e.target.value);
+            if (channelOptionsList) channelOptionsList.style.display = 'block';
+        });
+    }
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.custom-select-container')) {
+            if (channelOptionsList) channelOptionsList.style.display = 'none';
+        }
+    });
+
+    // =================================================================
+    // 5. 初始化
+    // =================================================================
+    await initializeChannels();
+    renderCategoriesAndItems();
+    selectChannel({
+        value: '全部',
+        text: '关注列表'
+    });
+
+    // =================================================================
+    // 6. 音频播放器逻辑 (保持不变)
+    // =================================================================
+    // ... (将你原来的音频播放器代码完整复制到这里) ...
+    const btns = document.querySelectorAll('.audio button[data-aid]');
+    let caudio = null;
+    let ppBtn = null;
+    const fpBtn = document.querySelector('#floating_player #playpausebutton');
+    const fsb = document.querySelector('#seekbar');
+    const closeBtn = document.getElementById('close_player');
+    const fp = document.querySelector('#floating_player');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            if (fp) {
+                fp.classList.remove("show");
+                setTimeout(() => {
+                    fp.style.display = 'none';
+                }, 300);
+            }
+            document.querySelectorAll('.post.nowplaying').forEach(e => e.classList.remove('nowplaying'));
+        });
+    }
+    if (fpBtn) {
+        fpBtn.addEventListener('click', function() {
+            togglePP();
+        });
+    }
+
+    function togglePP() {
+        if (caudio && caudio.paused) {
+            caudio.play();
+        } else if (caudio) {
+            caudio.pause();
+        }
+    }
+    if (fsb) {
+        fsb.addEventListener('input', function(e) {
+            if (!caudio) return;
+            const seekPercentage = fsb.value;
+            const seekTime = (seekPercentage / 100) * caudio.duration;
+            caudio.currentTime = seekTime;
+        });
+    }
+    const speeds = [1, 1.2, 1.5, 1.75, 2];
+    let currentSpeedIndex = 0;
+    const speedBtn = document.getElementById('speed');
+    if (speedBtn) {
+        speedBtn.addEventListener('click', () => {
+            if (!caudio) return;
+            currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+            const speed = speeds[currentSpeedIndex];
+            caudio.playbackRate = speed;
+            speedBtn.innerText = speed + 'x';
+            updatePositionState();
+        });
+    }
+    const plus30Btn = document.getElementById('plus30');
+    if (plus30Btn) {
+        plus30Btn.addEventListener('click', () => {
+            if (caudio) caudio.currentTime += 30;
+        });
+    }
+
+    function updateAudioTime() {
+        if (!caudio) return;
+        const currentTime = caudio.currentTime;
+        document.getElementById('current_time').textContent = formatTime(currentTime);
+        document.getElementById('duration').textContent = formatTime(caudio.duration);
+        const progress = (currentTime / caudio.duration) * 100;
+        if (fsb) fsb.value = progress;
+    }
+
+    function playTime() {
+        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+        if (fpBtn) fpBtn.classList.add('playing');
+        if (ppBtn) ppBtn.classList.add('playing');
+        updatePositionState();
+    }
+
+    function pauseTime() {
+        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+        if (fpBtn) fpBtn.classList.remove('playing');
+        if (ppBtn) ppBtn.classList.remove('playing');
+        updatePositionState();
+    }
+
+    function formatTime(time) {
+        if (isNaN(time)) return "00:00";
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
+    }
+    btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const aid = this.getAttribute('data-aid');
+            const audioElem = document.querySelector('audio[aid="' + aid + '"]');
+            changePlayback(audioElem);
+        });
+    });
+
+    function changePlayback(audioElem) {
+        const prevPPBtn = ppBtn;
+        ppBtn = document.querySelector('[data-aid="' + audioElem.getAttribute('aid') + '"]');
+        const src = audioElem.getAttribute('src');
+        if (caudio && caudio !== audioElem) {
+            caudio.pause();
+            caudio.removeEventListener('timeupdate', updateAudioTime);
+            caudio.removeEventListener('play', playTime);
+            caudio.removeEventListener('pause', pauseTime);
+            if (prevPPBtn) prevPPBtn.classList.remove('playing');
+            if (fpBtn) fpBtn.classList.remove('playing');
+            if (fsb) fsb.value = '0';
+            if (audioElem.readyState >= 1) {
+                startPlayback(audioElem);
+            } else {
+                audioElem.addEventListener('loadedmetadata', () => startPlayback(audioElem), {
+                    once: true
+                });
+            }
+        } else if (caudio) {
+            togglePP();
+        } else {
+            if (audioElem.readyState >= 1) {
+                startPlayback(audioElem);
+            } else {
+                audioElem.addEventListener('loadedmetadata', () => startPlayback(audioElem), {
+                    once: true
+                });
+            }
+        }
+    }
+
+    function updatePositionState() {
+        if (!('mediaSession' in navigator) || !caudio) return;
+        navigator.mediaSession.setPositionState({
+            duration: caudio.duration,
+            playbackRate: caudio.playbackRate,
+            position: caudio.currentTime
+        });
+    }
+
+    function startPlayback(audioElem) {
+        const closestPost = audioElem.closest('.post');
+        document.querySelectorAll('.post.nowplaying').forEach(e => e.classList.remove('nowplaying'));
+        closestPost.classList.add('nowplaying');
+        const h2text = closestPost.querySelector('h2').textContent;
+        const titleElem = document.getElementById('title');
+        if (titleElem) titleElem.innerHTML = h2text;
+        caudio = audioElem;
+        caudio.addEventListener('timeupdate', updateAudioTime);
+        caudio.addEventListener('play', playTime);
+        caudio.addEventListener('pause', pauseTime);
+        const durationElem = document.getElementById('duration');
+        if (durationElem) durationElem.textContent = formatTime(caudio.duration);
+        if (fp) {
+            fp.style.display = 'block';
+            setTimeout(() => {
+                fp.classList.add("show");
+            }, 10);
+        }
+        caudio.play();
+        if (speedBtn) speedBtn.innerText = caudio.playbackRate + 'x';
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: h2text,
+                artist: closestPost.querySelector('.channel').textContent,
+                album: "rssTea",
+                artwork: [{
+                    src: closestPost.querySelector('img').src
+                }],
+            });
+            const totalAids = document.querySelectorAll('[data-aid]').length;
+            let nextAid = Math.floor(audioElem.getAttribute('aid')) + 1;
+            let prevAid = Math.floor(audioElem.getAttribute('aid')) - 1;
+            if (nextAid > totalAids - 1) {
+                nextAid = 0;
+            }
+            if (prevAid < 0) {
+                prevAid = totalAids - 1;
+            }
+            navigator.mediaSession.setActionHandler("play", () => caudio.play());
+            navigator.mediaSession.setActionHandler("pause", () => caudio.pause());
+            navigator.mediaSession.setActionHandler('nexttrack', () => changePlayback(document.querySelector("[aid=\"" + nextAid + "\"]")));
+            navigator.mediaSession.setActionHandler('previoustrack', () => changePlayback(document.querySelector("[aid=\"" + prevAid + "\"]")));
+            navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+                caudio.currentTime = caudio.currentTime - (details.seekOffset || 10);
+                updatePositionState();
+            });
+            navigator.mediaSession.setActionHandler('seekforward', (details) => {
+                caudio.currentTime = caudio.currentTime + (details.seekOffset || 10);
+                updatePositionState();
+            });
+        }
+    }
+
+    // =================================================================
+    // 7. 返回顶部按钮逻辑 (保持不变)
+    // =================================================================
+    // ... (将你原来的返回顶部代码完整复制到这里) ...
+    const backTopContainer = document.getElementById('back-top-container');
+    const backTopMain = document.getElementById('back-top-main');
+    const progressCircle = document.getElementById('progress-ring-circle');
+    if (backTopContainer && backTopMain && progressCircle) {
+        const radius = 42;
+        const circumference = 2 * Math.PI * radius;
+        progressCircle.style.strokeDasharray = `${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+        const scrollToTop = () => window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        function throttle(fn, delay = 50) {
+            let timer = null;
+            return function(...args) {
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn.apply(this, args);
+                        timer = null;
+                    }, delay);
+                }
+            };
+        }
+        const updateScrollProgress = () => {
+            const {
+                scrollY,
+                innerHeight
+            } = window;
+            const {
+                scrollHeight
+            } = document.documentElement;
+            const totalScrollableHeight = scrollHeight - innerHeight;
+            if (totalScrollableHeight <= 0) {
+                progressCircle.style.strokeDashoffset = circumference;
+                return;
+            }
+            const scrollProgress = Math.min(scrollY / totalScrollableHeight, 1);
+            const offset = circumference - (scrollProgress * circumference);
+            progressCircle.style.strokeDashoffset = offset;
+        };
+        const handleScroll = throttle(() => {
+            const shouldShow = window.scrollY > 100;
+            if (shouldShow) {
+                backTopContainer.classList.add('show');
+            } else {
+                backTopContainer.classList.remove('show');
+            }
+            updateScrollProgress();
+        });
+        backTopMain.addEventListener('click', scrollToTop);
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+    }
+
+});
