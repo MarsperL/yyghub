@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 <!-- ==================== 无限滚动脚本 (直接使用 feed.json) ==================== -->
 document.addEventListener('DOMContentLoaded', function() {
-    const postsContainer = document.getElementById('posts-container');
+    const postsContainer = document.getElementById('wrap');
     const loadingIndicator = document.getElementById('loading-indicator');
     let currentPage = 1; // 从第1页开始
     let isLoading = false;
