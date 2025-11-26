@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const finishedText = document.getElementById('finished-text');
 
     // 获取元数据
-    fetch('public/meta.json')
+    fetch('public/api.php?action=meta')
         .then(response => response.json())
         .then(meta => {
             // 如果总页数只有1页，则隐藏加载器
@@ -461,10 +461,10 @@ document.addEventListener('DOMContentLoaded', function() {
         loadingText.style.display = 'block';
 
         // 请求下一页数据
-        fetch(`generate.php?page=${currentPage}`)
+        fetch(`public/api.php?action=posts&page=${currentPage}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('网络响应错误');
+                    return response.json().then(err => { throw new Error(err.error || '网络响应错误') });
                 }
                 return response.json();
             })
@@ -472,6 +472,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 isLoading = false;
                 loadingSpinner.style.display = 'none';
                 loadingText.style.display = 'none';
+                // 如果返回的是错误对象，说明没有更多页面了
+            if (posts.error) {
+                allPagesLoaded = true;
+                finishedText.style.display = 'block';
+                return;
+            }
 
                 if (posts.length === 0) {
                     allPagesLoaded = true;
@@ -487,7 +493,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadingSpinner.style.display = 'none';
                 loadingText.style.display = 'none';
                 console.error('加载文章失败:', error);
-                // 可以在这里显示错误提示
+                           // 如果错误是 "Page not found"，说明已经加载完毕
+            if (error.message.includes('Page not found')) {
+                allPagesLoaded = true;
+                finishedText.style.display = 'block';
+            }
             });
     }
 
