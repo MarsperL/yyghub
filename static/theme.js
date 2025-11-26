@@ -421,3 +421,94 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+// 分页实现示例
+document.addEventListener('DOMContentLoaded', function() {
+    const postsContainer = document.querySelector('.posts-container');
+    const loadMoreBtn = document.getElementById('load-more');
+    let currentPage = 0;
+    const postsPerPage = 20;
+    let allPosts = [];
+    
+    // 加载所有文章数据
+    fetch('public/feed.json')
+        .then(response => response.json())
+        .then(data => {
+            allPosts = data;
+            renderPosts();
+        })
+        .catch(error => console.error('Error loading posts:', error));
+    
+    // 渲染当前页的文章
+    function renderPosts() {
+        const startIndex = currentPage * postsPerPage;
+        const endIndex = startIndex + postsPerPage;
+        const postsToRender = allPosts.slice(startIndex, endIndex);
+        
+        if (postsToRender.length === 0) {
+            loadMoreBtn.style.display = 'none';
+            return;
+        }
+        
+        postsToRender.forEach(post => {
+            const postElement = createPostElement(post);
+            postsContainer.appendChild(postElement);
+        });
+        
+        currentPage++;
+        
+        // 如果没有更多文章，隐藏加载更多按钮
+        if (endIndex >= allPosts.length) {
+            loadMoreBtn.style.display = 'none';
+        }
+    }
+    
+    // 创建文章元素
+    function createPostElement(post) {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post';
+        postDiv.setAttribute('data-channel', post.ch);
+        postDiv.setAttribute('data-category', post.category);
+        postDiv.setAttribute('data-ts', post.date);
+        
+        // 构建文章HTML
+        let postHTML = '';
+        
+        // 添加图片
+        if (post.image) {
+            postHTML += `<div class="leftpan"><img src="${post.image}" loading="lazy"/></div>`;
+        } else {
+            const domain = new URL(post.link).hostname;
+            postHTML += `<div class="leftpan"><img src="https://toolb.cn/favicon/${domain}" loading="lazy"/></div>`;
+        }
+        
+        // 添加内容
+        postHTML += `
+            <div class="rightpan">
+                <div class="feedname">
+                    <span class="channel">${post.ch}</span> &bull; 
+                    <span class="date">${new Date(post.date * 1000).toLocaleDateString()}</span>
+                </div>
+                <h2><a href="${post.link}" target="_blank">${post.title}</a></h2>
+            </div>
+        `;
+        
+        // 添加音频（如果有）
+        if (post.audio) {
+            postHTML += `
+                <div class="audio">
+                    <button data-aid="${post.audio}">Play</button>
+                    <audio src="${post.audio}" preload="metadata" controls></audio>
+                </div>
+            `;
+        }
+        
+        postDiv.innerHTML = postHTML;
+        return postDiv;
+    }
+    
+    // 加载更多按钮点击事件
+    loadMoreBtn.addEventListener('click', renderPosts);
+    
+    // 初始加载
+    renderPosts();
+});
