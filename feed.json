@@ -310,6 +310,16 @@
         "category": "博客"
     },
     {
+        "title": "高效沟通(三)：沟通方式及技巧",
+        "link": "https:\/\/chegva.com\/6273.html",
+        "ch": "CHEGVA",
+        "date": 1763697610,
+        "image": null,
+        "audio": null,
+        "source_url": "https:\/\/chegva.com\/feed",
+        "category": "博客"
+    },
+    {
         "title": "Gemini 3 深度解析：从像素级复刻到 AGI 雏形，多模态 AI 如何重构开发与创作？",
         "link": "https:\/\/www.lifengdi.com\/ren-gong-zhi-neng\/4588",
         "ch": "李锋镝的博客",
@@ -680,6 +690,16 @@
         "category": "博客"
     },
     {
+        "title": "大语言模型级别划分及使用场景",
+        "link": "https:\/\/chegva.com\/6554.html",
+        "ch": "CHEGVA",
+        "date": 1762919142,
+        "image": "https:\/\/cdn.chegva.com\/ueditor\/php\/upload\/image\/20251112\/1762918070214865.png",
+        "audio": null,
+        "source_url": "https:\/\/chegva.com\/feed",
+        "category": "博客"
+    },
+    {
         "title": "Vol.1151 旧时温度",
         "link": "https:\/\/www.indie.cn\/vol\/1151",
         "ch": "雀乐",
@@ -737,6 +757,16 @@
         "image": null,
         "audio": null,
         "source_url": "https:\/\/bluehe.cn\/rss.xml",
+        "category": "博客"
+    },
+    {
+        "title": "MySQL迁移至达梦数据库全攻略",
+        "link": "https:\/\/chegva.com\/6544.html",
+        "ch": "CHEGVA",
+        "date": 1762610269,
+        "image": "https:\/\/cdn.chegva.com\/ueditor\/php\/upload\/image\/20251022\/1761118697206371.png",
+        "audio": null,
+        "source_url": "https:\/\/chegva.com\/feed",
         "category": "博客"
     },
     {
@@ -1040,6 +1070,16 @@
         "category": "播客"
     },
     {
+        "title": "达梦数据库角色与权限最佳实践",
+        "link": "https:\/\/chegva.com\/6541.html",
+        "ch": "CHEGVA",
+        "date": 1761527344,
+        "image": "https:\/\/cdn.chegva.com\/ueditor\/php\/upload\/image\/20251017\/1760675960297272.png",
+        "audio": null,
+        "source_url": "https:\/\/chegva.com\/feed",
+        "category": "博客"
+    },
+    {
         "title": "记一次与 Coding Agent 合作实现 Feature 的过程",
         "link": "https:\/\/limboy.me\/posts\/collaborating-with-coding-agent-to-implement-a-feature",
         "ch": "Limboy's Essays",
@@ -1178,6 +1218,16 @@
         "audio": "https:\/\/jt.ximalaya.com\/\/GKwRIMAMylN3AYjXdQQldqtx.m4a?channel=rss&album_id=56054422&track_id=922574705&uid=384998629&jt=https:\/\/aod.cos.tx.xmcdn.com\/storages\/33ef-audiofreehighqps\/A8\/02\/GKwRIMAMylN3AYjXdQQldqtx.m4a",
         "source_url": "https:\/\/www.ximalaya.com\/album\/56054422.xml",
         "category": "播客"
+    },
+    {
+        "title": "DM达梦数据库登陆方式及日常运维命令",
+        "link": "https:\/\/chegva.com\/6538.html",
+        "ch": "CHEGVA",
+        "date": 1760908899,
+        "image": null,
+        "audio": null,
+        "source_url": "https:\/\/chegva.com\/feed",
+        "category": "博客"
     },
     {
         "title": "AI 下半场",
