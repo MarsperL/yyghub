@@ -1,3 +1,161 @@
+document.addEventListener('DOMContentLoaded', function () {
+    let allPosts = [];
+    let displayedCount = 20; // 初始已显示数量
+    const batchSize = 20;    // 每次加载条数
+
+    // 1. 加载全部文章数据
+    fetch('feed.json')
+        .then(response => response.json())
+        .then(data => {
+            allPosts = data;
+            const loadMoreContainer = document.getElementById('load-more-container');
+            if (loadMoreContainer && allPosts.length <= 20) {
+                loadMoreContainer.style.display = 'none';
+            }
+        })
+        .catch(err => console.error('无法加载 feed.json:', err));
+
+    // 2. 格式化日期：Y-n-j（无前导零）
+    function formatDate(timestamp) {
+        const d = new Date(timestamp * 1000);
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+    }
+
+    // 3. 渲染一批文章（从 start 到 end）
+    function renderPosts(start, end) {
+        const wrap = document.getElementById('wrap');
+        const loadMoreContainer = document.getElementById('load-more-container');
+        if (!wrap || !loadMoreContainer) return;
+
+        const fragment = document.createDocumentFragment();
+        let audioIndexOffset = document.querySelectorAll('#wrap audio').length;
+
+        for (let i = start; i < Math.min(end, allPosts.length); i++) {
+            const post = allPosts[i];
+            const isAudio = !!post.audio;
+            const isToday = post.date >= (new Date().setHours(0, 0, 0, 0) / 1000);
+            const todayClass = isToday ? ' today' : '';
+
+            const postDiv = document.createElement('div');
+            postDiv.className = 'post' + todayClass;
+            postDiv.dataset.channel = post.ch || '';
+            postDiv.dataset.category = post.category || '';
+            postDiv.dataset.ts = post.date;
+            postDiv.dataset.audio = isAudio ? '1' : '0';
+
+            // 左侧图片区域
+            const leftPan = document.createElement('div');
+            leftPan.className = 'leftpan';
+            if (post.image) {
+                const img = document.createElement('img');
+                img.src = post.image;
+                img.loading = 'lazy';
+                leftPan.appendChild(img);
+            } else {
+                try {
+                    const domain = new URL(post.link).hostname;
+                    const img = document.createElement('img');
+                    img.src = `https://toolb.cn/favicon/${encodeURIComponent(domain)}`;
+                    img.loading = 'lazy';
+                    leftPan.appendChild(img);
+                } catch (e) {
+                    const img = document.createElement('img');
+                    img.src = '/yyghub/img/loading.gif';
+                    img.loading = 'lazy';
+                    leftPan.appendChild(img);
+                }
+            }
+
+            // 右侧内容区域
+            const rightPan = document.createElement('div');
+            rightPan.className = 'rightpan';
+
+            const feedName = document.createElement('div');
+            feedName.className = 'feedname';
+            feedName.innerHTML = `<span class="channel">${post.ch || ''}</span> &bull; <span class="date">${formatDate(post.date)}</span>`;
+
+            const h2 = document.createElement('h2');
+            const a = document.createElement('a');
+            a.href = post.link;
+            a.target = '_blank';
+            a.textContent = post.title || '无标题';
+            h2.appendChild(a);
+
+            rightPan.appendChild(feedName);
+            rightPan.appendChild(h2);
+
+            // 音频部分
+            if (isAudio) {
+                const audioDiv = document.createElement('div');
+                audioDiv.className = 'audio';
+                const btn = document.createElement('button');
+                btn.className = 'play-btn';
+                btn.dataset.aid = audioIndexOffset;
+                btn.textContent = 'Play';
+                const audio = document.createElement('audio');
+                audio.src = post.audio;
+                audio.preload = 'none';
+                audio.dataset.aid = audioIndexOffset;
+                audioIndexOffset++;
+
+                audioDiv.appendChild(btn);
+                audioDiv.appendChild(audio);
+                rightPan.appendChild(audioDiv);
+            }
+
+            postDiv.appendChild(leftPan);
+            postDiv.appendChild(rightPan);
+            fragment.appendChild(postDiv);
+        }
+
+        // 插入到 #load-more-container 之前
+        wrap.insertBefore(fragment, loadMoreContainer);
+
+        // 绑定新按钮的播放事件
+        bindPlayButtons();
+    }
+
+    // 4. 播放按钮事件绑定（防重复）
+    function bindPlayButtons() {
+        document.querySelectorAll('.play-btn:not([data-bound])').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const aid = this.dataset.aid;
+                const audio = document.querySelector(`audio[data-aid="${aid}"]`);
+                if (audio) {
+                    if (audio.paused) {
+                        audio.load();
+                        audio.play().catch(e => console.warn('播放被阻止或失败:', e));
+                        this.textContent = 'Pause';
+                    } else {
+                        audio.pause();
+                        this.textContent = 'Play';
+                    }
+                }
+            });
+            btn.dataset.bound = 'true';
+        });
+    }
+
+    // 5. 初始化：绑定已有按钮
+    bindPlayButtons();
+
+    // 6. “加载更多”按钮逻辑
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function () {
+            const nextStart = displayedCount;
+            const nextEnd = displayedCount + batchSize;
+            renderPosts(nextStart, nextEnd);
+            displayedCount = nextEnd;
+
+            if (displayedCount >= allPosts.length) {
+                this.parentElement.style.display = 'none'; // 隐藏整个容器
+            }
+        });
+    }
+});
+
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     // =================================================================
