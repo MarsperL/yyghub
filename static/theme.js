@@ -421,71 +421,119 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const postsContainer = document.getElementById('posts-container');
-        const loadingIndicator = document.getElementById('loading-indicator');
-        let currentPage = 2; // 从第2页开始加载，因为第1页已经由PHP生成
-        let isLoading = false; // 防止重复加载
+<!-- ==================== 无限滚动脚本 (直接使用 feed.json) ==================== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const postsContainer = document.getElementById('posts-container');
+    const loadingIndicator = document.getElementById('loading-indicator');
+    let currentPage = 1; // 从第1页开始
+    let isLoading = false;
+    let allPosts = []; // 用于存储所有文章数据
+    const postsPerPage = 8;
 
-        // 函数：加载更多文章
-        function loadMorePosts() {
-            if (isLoading) return; // 如果正在加载，则不执行
+    // 函数：从 feed.json 加载所有数据
+    function loadAllPosts() {
+        // 避免重复加载
+        if (allPosts.length > 0) return Promise.resolve();
 
-            isLoading = true;
-            loadingIndicator.style.display = 'block'; // 显示加载指示器
+        return fetch('feed.json')
+            .then(response => response.json())
+            .then(data => {
+                allPosts = data;
+            });
+    }
 
-            // 使用 fetch API 请求后端
-            fetch(`api.php?page=${currentPage}`)
-                .then(response => {
-                    // 如果没有更多内容 (HTTP 204)
-                    if (response.status === 204) {
-                        console.log("没有更多内容了。");
-                        // 移除滚动监听，避免无意义的请求
-                        window.removeEventListener('scroll', handleScroll);
-                        loadingIndicator.textContent = '已加载全部内容';
-                        loadingIndicator.style.display = 'block'; // 确保提示信息可见
-                        return Promise.reject('no more content');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // 将新加载的HTML插入到容器中
-                    postsContainer.insertAdjacentHTML('beforeend', data.html);
+    // 函数：渲染文章
+    function renderPosts(posts) {
+        let html = '';
+        const today_timestamp = new Date().setHours(0,0,0,0);
 
-                    // 更新页码
-                    currentPage++;
-
-                    // 检查是否还有更多内容
-                    if (!data.has_more) {
-                        window.removeEventListener('scroll', handleScroll); // 停止监听
-                        loadingIndicator.textContent = '已加载全部内容';
-                        loadingIndicator.style.display = 'block'; // 确保提示信息可见
-                    }
-                })
-                .catch(error => {
-                    if (error !== 'no more content') {
-                        console.error('加载文章失败:', error);
-                        loadingIndicator.textContent = '加载失败，请稍后重试。';
-                        loadingIndicator.style.display = 'block'; // 确保错误信息可见
-                    }
-                })
-                .finally(() => {
-                    isLoading = false;
-                    // 只有在还有更多内容时才隐藏加载指示器
-                    if (loadingIndicator.textContent !== '已加载全部内容' && loadingIndicator.textContent !== '加载失败，请稍后重试。') {
-                        loadingIndicator.style.display = 'none';
-                    }
-                });
-        }
-
-        // 函数：处理滚动事件
-        function handleScroll() {
-            // 当滚动到距离底部200px时触发加载
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-                loadMorePosts();
+        posts.forEach(post => {
+            const isaudio = !empty(post.audio) ? 1 : 0;
+            const channelIdentifier = htmlspecialchars(post.ch);
+            const is_today = (post.date * 1000 >= today_timestamp); // JS时间戳是毫秒
+            const today_class = is_today ? ' today' : '';
+            
+            html += `<div class="post${today_class}" data-channel="${channelIdentifier}" data-category="${htmlspecialchars(post.category)}" data-ts="${post.date}" data-audio="${isaudio}">`;
+            if (!empty(post.image)) {
+                 html += `<div class="leftpan"><img src="${htmlspecialchars(post.image)}" loading="lazy"/></div>`;
+            } else {
+                const domain = new URL(post.link).hostname;
+                html += `<div class="leftpan"><img src="https://toolb.cn/favicon/${encodeURIComponent(domain)}" loading="lazy"/></div>`;
             }
-        }
+           html += `<div class="rightpan"><div class="feedname"><span class="channel">${htmlspecialchars(post.ch)}</span> &bull; <span class="date">${new Date(post.date * 1000).toLocaleDateString()}</span></div>
+<h2><a href="${htmlspecialchars(post.link)}" target="_blank">${htmlspecialchars(post.title)}</a></h2>`;
+            if (!empty(post.audio)) {
+                // 注意：这里的aid需要根据实际已渲染的数量来计算
+                const currentAid = postsContainer.querySelectorAll('.post').length + html.split('data-audio').length - 1;
+                html += `<div class="audio"><button data-aid="${currentAid}">Play</button><audio src="${htmlspecialchars(post.audio)}" preload="metadata" aid="${currentAid}" controls></audio></div>`;
+            }
+            html += "</div></div>";
+        });
+        postsContainer.insertAdjacentHTML('beforeend', html);
+    }
 
-        // 监听滚动事件
-        window.addEventListener('scroll', handleScroll);
-    });
+    // 辅助函数
+    function empty(str) {
+        return !str && str !== 0;
+    }
+    function htmlspecialchars(str) {
+        if (!str) return '';
+        return str.toString().replace(/&/g, '&amp;')
+                           .replace(/</g, '&lt;')
+                           .replace(/>/g, '&gt;')
+                           .replace(/"/g, '&quot;')
+                           .replace(/'/g, '&#039;');
+    }
+
+    // 函数：加载更多文章
+    function loadMorePosts() {
+        if (isLoading) return;
+
+        isLoading = true;
+        loadingIndicator.style.display = 'block';
+
+        loadAllPosts().then(() => {
+            const offset = (currentPage - 1) * postsPerPage;
+            const postsToRender = allPosts.slice(offset, offset + postsPerPage);
+
+            if (postsToRender.length === 0) {
+                window.removeEventListener('scroll', handleScroll);
+                loadingIndicator.textContent = '已加载全部内容';
+                loadingIndicator.style.display = 'block';
+                return;
+            }
+
+            renderPosts(postsToRender);
+            currentPage++;
+
+            if (offset + postsPerPage >= allPosts.length) {
+                window.removeEventListener('scroll', handleScroll);
+                loadingIndicator.textContent = '已加载全部内容';
+                loadingIndicator.style.display = 'block';
+            }
+        }).catch(error => {
+            console.error('加载文章失败:', error);
+            loadingIndicator.textContent = '加载失败，请稍后重试。';
+            loadingIndicator.style.display = 'block';
+        }).finally(() => {
+            isLoading = false;
+            if (loadingIndicator.textContent !== '已加载全部内容' && loadingIndicator.textContent !== '加载失败，请稍后重试。') {
+                loadingIndicator.style.display = 'none';
+            }
+        });
+    }
+
+    // 函数：处理滚动事件
+    function handleScroll() {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+            loadMorePosts();
+        }
+    }
+
+    // 初始加载
+    loadMorePosts();
+    // 监听滚动事件
+    window.addEventListener('scroll', handleScroll);
+});
+</script>
