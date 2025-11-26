@@ -422,38 +422,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    // 所有播放按钮
-    document.querySelectorAll('.audio button').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const aid = this.dataset.aid;
-            const audioEl = document.querySelector(`audio[aid="${aid}"]`);
-            if (!audioEl) return;
-
-            // 查找当前正在播放的其他音频并暂停
-            document.querySelectorAll('audio').forEach(a => {
-                if (a !== audioEl && !a.paused) {
-                    a.pause();
-                    const otherBtn = document.querySelector(`button[data-aid="${a.getAttribute('aid')}"]`);
-                    if (otherBtn) otherBtn.textContent = 'Play';
-                }
-            });
-
-            // 切换播放/暂停
-            if (audioEl.paused) {
-                // 首次点击才设置 preload=auto，避免预加载
-                audioEl.setAttribute('preload', 'metadata');
-                audioEl.style.display = 'inline-block'; // 显示 controls
-                audioEl.play().catch(e => {
-                    console.warn('播放被阻止:', e);
-                    this.textContent = 'Play (点击后允许)';
-                });
-                this.textContent = 'Pause';
-            } else {
-                audioEl.pause();
-                this.textContent = 'Play';
-            }
-        });
-    });
-});
-
