@@ -422,7 +422,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 <!-- ==================== 无限滚动脚本 (直接使用 feed.json) ==================== -->
-<script>
 document.addEventListener('DOMContentLoaded', function() {
     const postsContainer = document.getElementById('posts-container');
     const loadingIndicator = document.getElementById('loading-indicator');
@@ -536,4 +535,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // 监听滚动事件
     window.addEventListener('scroll', handleScroll);
 });
-</script>
