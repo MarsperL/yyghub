@@ -421,94 +421,122 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
-// 分页实现示例
+
 document.addEventListener('DOMContentLoaded', function() {
-    const postsContainer = document.querySelector('.posts-container');
-    const loadMoreBtn = document.getElementById('load-more');
-    let currentPage = 0;
-    const postsPerPage = 20;
-    let allPosts = [];
-    
-    // 加载所有文章数据
-    fetch('public/feed.json')
+    let currentPage = 1;
+    let isLoading = false;
+    let allPagesLoaded = false;
+
+    const postsContainer = document.querySelector('.posts-container'); // 假设你的文章列表被一个class为'posts-container'的div包裹
+    const loadMoreContainer = document.getElementById('load-more-container');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const loadingText = document.getElementById('loading-text');
+    const finishedText = document.getElementById('finished-text');
+
+    // 获取元数据
+    fetch('public/meta.json')
         .then(response => response.json())
-        .then(data => {
-            allPosts = data;
-            renderPosts();
+        .then(meta => {
+            // 如果总页数只有1页，则隐藏加载器
+            if (meta.total_pages <= 1) {
+                loadMoreContainer.style.display = 'none';
+            }
         })
-        .catch(error => console.error('Error loading posts:', error));
-    
-    // 渲染当前页的文章
-    function renderPosts() {
-        const startIndex = currentPage * postsPerPage;
-        const endIndex = startIndex + postsPerPage;
-        const postsToRender = allPosts.slice(startIndex, endIndex);
-        
-        if (postsToRender.length === 0) {
-            loadMoreBtn.style.display = 'none';
-            return;
+        .catch(error => console.error('无法加载元数据:', error));
+
+    // 监听滚动事件
+    window.addEventListener('scroll', () => {
+        if (isLoading || allPagesLoaded) return;
+
+        // 当滚动到距离底部200px时触发加载
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+            loadMorePosts();
         }
-        
-        postsToRender.forEach(post => {
+    });
+
+    function loadMorePosts() {
+        isLoading = true;
+        currentPage++;
+        loadingSpinner.style.display = 'block';
+        loadingText.style.display = 'block';
+
+        // 请求下一页数据
+        fetch(`generate.php?page=${currentPage}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('网络响应错误');
+                }
+                return response.json();
+            })
+            .then(posts => {
+                isLoading = false;
+                loadingSpinner.style.display = 'none';
+                loadingText.style.display = 'none';
+
+                if (posts.length === 0) {
+                    allPagesLoaded = true;
+                    finishedText.style.display = 'block';
+                    return;
+                }
+
+                // 将新文章追加到容器中
+                appendPosts(posts);
+            })
+            .catch(error => {
+                isLoading = false;
+                loadingSpinner.style.display = 'none';
+                loadingText.style.display = 'none';
+                console.error('加载文章失败:', error);
+                // 可以在这里显示错误提示
+            });
+    }
+
+    function appendPosts(posts) {
+        posts.forEach(post => {
             const postElement = createPostElement(post);
             postsContainer.appendChild(postElement);
         });
-        
-        currentPage++;
-        
-        // 如果没有更多文章，隐藏加载更多按钮
-        if (endIndex >= allPosts.length) {
-            loadMoreBtn.style.display = 'none';
-        }
+        // 如果有其他需要重新初始化的JS脚本（如音频播放器），可以在这里调用
+        // 例如: reinitializeAudioPlayers();
     }
     
-    // 创建文章元素
+    // 这个函数需要根据你的HTML结构来精确实现
     function createPostElement(post) {
-        const postDiv = document.createElement('div');
-        postDiv.className = 'post';
-        postDiv.setAttribute('data-channel', post.ch);
-        postDiv.setAttribute('data-category', post.category);
-        postDiv.setAttribute('data-ts', post.date);
-        
-        // 构建文章HTML
-        let postHTML = '';
-        
-        // 添加图片
+        const div = document.createElement('div');
+        div.className = 'post'; // 可以根据日期添加 'today' class
+        div.setAttribute('data-channel', post.ch);
+        div.setAttribute('data-category', post.category);
+        div.setAttribute('data-ts', post.date);
+        div.setAttribute('data-audio', post.audio ? 1 : 0);
+
+        const today_timestamp = new Date().setHours(0,0,0,0);
+        if (post.date * 1000 >= today_timestamp) {
+            div.classList.add('today');
+        }
+
+        let imageHtml = '';
         if (post.image) {
-            postHTML += `<div class="leftpan"><img src="${post.image}" loading="lazy"/></div>`;
+            imageHtml = `<div class="leftpan"><img src="${post.image}" loading="lazy"/></div>`;
         } else {
             const domain = new URL(post.link).hostname;
-            postHTML += `<div class="leftpan"><img src="https://toolb.cn/favicon/${domain}" loading="lazy"/></div>`;
+            imageHtml = `<div class="leftpan"><img src="https://toolb.cn/favicon/${domain}" loading="lazy"/></div>`;
         }
         
-        // 添加内容
-        postHTML += `
+        let audioHtml = '';
+        if (post.audio) {
+            // 注意：这里的aid索引需要处理，简单起见可以每次都重新分配或使用其他唯一ID
+            audioHtml = `<div class="audio"><button>Play</button><audio src="${post.audio}" preload="metadata" controls></audio></div>`;
+        }
+
+        div.innerHTML = `
+            ${imageHtml}
             <div class="rightpan">
-                <div class="feedname">
-                    <span class="channel">${post.ch}</span> &bull; 
-                    <span class="date">${new Date(post.date * 1000).toLocaleDateString()}</span>
-                </div>
+                <div class="feedname"><span class="channel">${post.ch}</span> &bull; <span class="date">${new Date(post.date * 1000).toLocaleDateString('zh-CN')}</span></div>
                 <h2><a href="${post.link}" target="_blank">${post.title}</a></h2>
+                ${audioHtml}
             </div>
         `;
-        
-        // 添加音频（如果有）
-        if (post.audio) {
-            postHTML += `
-                <div class="audio">
-                    <button data-aid="${post.audio}">Play</button>
-                    <audio src="${post.audio}" preload="metadata" controls></audio>
-                </div>
-            `;
-        }
-        
-        postDiv.innerHTML = postHTML;
-        return postDiv;
+        return div;
     }
-    
-    // 加载更多按钮点击事件
-    loadMoreBtn.addEventListener('click', renderPosts);
-    
-    // 初始加载
-    renderPosts();
 });
+
