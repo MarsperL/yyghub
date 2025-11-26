@@ -707,3 +707,70 @@ span.tab:hover, .custom-select-container:hover {
 }
 /* #############################今日更新标志样式############################# */
 
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.page-link, .page-current, .page-ellipsis {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border-radius: 4px;
+}
+
+.page-link {
+    background-color: #f1f1f1;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.page-link:hover {
+    background-color: #ddd;
+}
+
+.page-current {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.page-ellipsis {
+    color: #999;
+}
+/* 移动端优化样式 */
+.lazy-image {
+    transition: opacity 0.3s;
+    opacity: 0.7;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
+/* 移动端分页导航优化 */
+@media (max-width: 768px) {
+    .pagination {
+        font-size: 14px;
+    }
+    
+    .page-link, .page-current {
+        padding: 6px 10px;
+        margin: 0 2px;
+    }
+    
+    .page-ellipsis {
+        padding: 6px 4px;
+    }
+}
+
+/* 减少重绘和回流 */
+.post {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
