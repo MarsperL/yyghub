@@ -420,3 +420,81 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 });
+
+    // 图片懒加载
+document.addEventListener("DOMContentLoaded", function() {
+    // 定义一个默认的图片地址 (Base64编码的SVG)
+    const defaultImageSrc = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRUVFRUVFIi8+CjxwYXRoIGQ9Ik0yMSAzMkMzMSAyMiA0MSAyMiA0MSAyMk0zMiA0MUMzNy4zMTM3IDQxIDQxIDM3LjMxMzcgNDEgMzJDNDEgMjYuNjg2MyAzNy4zMTM3IDIzIDMyIDIzQzI2LjY4NjMgMjMgMjMgMjYuNjg2MyAyMyAzMkMyMyAzNy4zMTM3IDI2LjY4NjMgNDEgMzIgNDFaIiBzdHJva2U9IiNDQ0NDQ0MiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=';
+
+    let lazyImages = [].slice.call(document.querySelectorAll("img.lazy-img"));
+
+    if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    let lazyImage = entry.target;
+                    
+                    // 设置真正的图片源
+                    lazyImage.src = lazyImage.dataset.src;
+
+                    // --- 错误处理 ---
+                    // 如果图片加载失败，则显示默认图片
+                    lazyImage.onerror = function() {
+                        // 避免无限循环：如果默认图片也加载失败，不再尝试
+                        if (this.src !== defaultImageSrc) {
+                            this.src = defaultImageSrc;
+                        }
+                    };
+                    // --- 错误处理结束 ---
+
+                    // 图片加载成功后，添加 'loaded' 类以触发 CSS 过渡效果
+                    lazyImage.addEventListener('load', function() {
+                        lazyImage.classList.add('loaded');
+                    });
+
+                    // 停止观察已加载的图片
+                    lazyImageObserver.unobserve(lazyImage);
+                }
+            });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+        });
+    } else {
+        // 兜底方案：不支持 IntersectionObserver 的旧浏览器
+        let lazyLoadThrottleTimeout;
+        function lazyLoad () {
+            if (lazyLoadThrottleTimeout) {
+                clearTimeout(lazyLoadThrottleTimeout);
+            }
+
+            lazyLoadThrottleTimeout = setTimeout(function() {
+                let scrollTop = window.pageYOffset;
+                lazyImages.forEach(function(img) {
+                    if (img.offsetTop < (window.innerHeight + scrollTop)) {
+                        img.src = img.dataset.src;
+                        img.onerror = function() {
+                            if (this.src !== defaultImageSrc) {
+                                this.src = defaultImageSrc;
+                            }
+                        };
+                        img.classList.add('loaded');
+                        lazyImages = lazyImages.filter(function(image) {
+                            return image !== img;
+                        });
+                    }
+                });
+                if (lazyImages.length == 0) { 
+                    document.removeEventListener("scroll", lazyLoad);
+                    window.removeEventListener("resize", lazyLoad);
+                    window.removeEventListener("orientationChange", lazyLoad);
+                }
+            }, 20);
+        }
+
+        document.addEventListener("scroll", lazyLoad);
+        window.addEventListener("resize", lazyLoad);
+        window.addEventListener("orientationChange", lazyLoad);
+    }
+});
