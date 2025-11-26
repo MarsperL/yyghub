@@ -438,8 +438,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- 1. 初始化：一次性加载所有元数据和文章数据 ---
     Promise.all([
-        fetch('public/meta.json').then(res => res.json()),
-        fetch('public/feed.json').then(res => res.json())
+        fetch('meta.json').then(res => res.json()),
+        fetch('feed.json').then(res => res.json())
     ]).then(([metaData, postsData]) => {
         meta = metaData;
         allPosts = postsData;
