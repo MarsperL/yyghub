@@ -421,3 +421,71 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const postsContainer = document.getElementById('posts-container');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        let currentPage = 2; // 从第2页开始加载，因为第1页已经由PHP生成
+        let isLoading = false; // 防止重复加载
+
+        // 函数：加载更多文章
+        function loadMorePosts() {
+            if (isLoading) return; // 如果正在加载，则不执行
+
+            isLoading = true;
+            loadingIndicator.style.display = 'block'; // 显示加载指示器
+
+            // 使用 fetch API 请求后端
+            fetch(`api.php?page=${currentPage}`)
+                .then(response => {
+                    // 如果没有更多内容 (HTTP 204)
+                    if (response.status === 204) {
+                        console.log("没有更多内容了。");
+                        // 移除滚动监听，避免无意义的请求
+                        window.removeEventListener('scroll', handleScroll);
+                        loadingIndicator.textContent = '已加载全部内容';
+                        loadingIndicator.style.display = 'block'; // 确保提示信息可见
+                        return Promise.reject('no more content');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 将新加载的HTML插入到容器中
+                    postsContainer.insertAdjacentHTML('beforeend', data.html);
+
+                    // 更新页码
+                    currentPage++;
+
+                    // 检查是否还有更多内容
+                    if (!data.has_more) {
+                        window.removeEventListener('scroll', handleScroll); // 停止监听
+                        loadingIndicator.textContent = '已加载全部内容';
+                        loadingIndicator.style.display = 'block'; // 确保提示信息可见
+                    }
+                })
+                .catch(error => {
+                    if (error !== 'no more content') {
+                        console.error('加载文章失败:', error);
+                        loadingIndicator.textContent = '加载失败，请稍后重试。';
+                        loadingIndicator.style.display = 'block'; // 确保错误信息可见
+                    }
+                })
+                .finally(() => {
+                    isLoading = false;
+                    // 只有在还有更多内容时才隐藏加载指示器
+                    if (loadingIndicator.textContent !== '已加载全部内容' && loadingIndicator.textContent !== '加载失败，请稍后重试。') {
+                        loadingIndicator.style.display = 'none';
+                    }
+                });
+        }
+
+        // 函数：处理滚动事件
+        function handleScroll() {
+            // 当滚动到距离底部200px时触发加载
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+                loadMorePosts();
+            }
+        }
+
+        // 监听滚动事件
+        window.addEventListener('scroll', handleScroll);
+    });
