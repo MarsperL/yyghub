@@ -23,8 +23,8 @@
 
 div#wrap {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* 2. 定义三列，每列等宽 */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2. 定义两列，每列等宽 */
     gap: 20px;
     /* 3. 定义列与列、行与行之间的间距 */
     align-items: start;
@@ -41,33 +41,13 @@ div#wrap {
         margin: 2px 10px;
     }
 }
+
 @media (min-width: 720px) {
     div#filter {
-        border-radius: 10px;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-		width: auto;
-    }
-	 span#filters {
-	    display: inline-block;
-        margin-top: 10px;
-        background: transparent;
-        border: none;
-    }
-     span.tab, 
-     span.tab.active {
-        padding: 10px;
-		display: inline-block;
-     }
-	 select {
-		display: inline-block;
-		 width: auto;
-    }
-	 select.selected {
-        /* display: inline-block; */
-        width: auto;
+        position: fixed;
+        z-index: 1;
     }
 }
-
 
 /* 为关闭按钮提供基本样式 */
 #close_player {
@@ -90,12 +70,12 @@ div#wrap {
 #close_player:hover {
     opacity: 0.7;
 }
-	
 </style>
 </head>
 <body>
 <div id="header">rsswe</div>
-<div id="filter"><span id="filters">
+    <div id="pcwrap">
+<div id="filter"><div class="pclogo"><img src="img/favicon.ico" alt="云野阁" class=""></div><span id="filters">
 <span class="tab"  onclick="window.location.href='/yyghub'">
     <svg fill="currentColor" viewBox="0 0 24 24" width="15" height="15" color="#FC7E11">
     <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"></path>
@@ -124,14 +104,13 @@ div#wrap {
     </div>
 </div>
 </span>
-</div>  
+</div>
 <div id="wrap">
 <div class="post today" data-channel="李锋镝的博客" data-category="" data-ts="1764296007" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.lifengdi.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">李锋镝的博客</span> &bull; <span class="date">2025-11-28</span></div>
 <h2><a href="https://www.lifengdi.com/ren-gong-zhi-neng/4603" target="_blank">9.9元解锁AI编程新体验：Doubao-Seed-Code 深度实测</a></h2></div></div><div class="post today" data-channel="HelloGitHub 月刊" data-category="" data-ts="1764288177" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/hellogithub.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">HelloGitHub 月刊</span> &bull; <span class="date">2025-11-28</span></div>
 <h2><a href="https://hellogithub.com/periodical/volume/116" target="_blank">HelloGitHub 第 116 期</a></h2></div></div><div class="post today" data-channel="沈奕斐的播客" data-category="" data-ts="1764288000" data-audio="1"><div class="leftpan"><img src="https://toolb.cn/favicon/www.xiaoyuzhoufm.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">沈奕斐的播客</span> &bull; <span class="date">2025-11-28</span></div>
 <h2><a href="https://www.xiaoyuzhoufm.com/episode/692818ec9ccdf1f2d529be92?utm_source=rss" target="_blank">236.拼尽全力还是失败了，怎么办？怎样才算真正努力？｜职场系列04</a></h2><div class="audio"><button data-aid="0">Play</button><audio src="https://dts-api.xiaoyuzhoufm.com/track/5f4e170c9504bbdb77566a19/692818ec9ccdf1f2d529be92/media.xyzcdn.net/5f4e170c9504bbdb77566a19/lndnc21r-AbKA6uvRh7QFny6cDVe.m4a" preload="metadata" aid="0"  controls></audio></div></div></div><div class="post" data-channel="二丫讲梵" data-category="" data-ts="1764284301" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/wiki.eryajf.net" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">二丫讲梵</span> &bull; <span class="date">2025-11-27</span></div>
-<h2><a href="https://wiki.eryajf.net/pages/7b0c3c/" target="_blank">学习周刊-总第239期-2025年第48周</a></h2></div></div><div class="post" data-channel="Collabnix" data-category="" data-ts="1764263417" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/collabnix.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Collabnix</span> &bull; <span class="date">2025-11-27</span></div>
-<h2><a href="https://collabnix.com/effective-management-of-multiple-google-ads-accounts/" target="_blank">Effective Management of Multiple Google Ads Accounts</a></h2></div></div><div class="post" data-channel="Virtualization Howto" data-category="" data-ts="1764253673" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.virtualizationhowto.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Virtualization Howto</span> &bull; <span class="date">2025-11-27</span></div>
+<h2><a href="https://wiki.eryajf.net/pages/7b0c3c/" target="_blank">学习周刊-总第239期-2025年第48周</a></h2></div></div><div class="post" data-channel="Virtualization Howto" data-category="" data-ts="1764253673" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.virtualizationhowto.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Virtualization Howto</span> &bull; <span class="date">2025-11-27</span></div>
 <h2><a href="https://www.virtualizationhowto.com/2025/11/the-best-mini-pcs-for-home-labs-in-2025-ranked-by-real-performance/" target="_blank">The Best Mini PCs for Home Labs in 2025 (Ranked by Real Performance)</a></h2></div></div><div class="post" data-channel="李锋镝的博客" data-category="" data-ts="1764230941" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.lifengdi.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">李锋镝的博客</span> &bull; <span class="date">2025-11-27</span></div>
 <h2><a href="https://www.lifengdi.com/ren-gong-zhi-neng/4601" target="_blank">提示词工程进阶指南：8大核心技巧，让AI精准读懂你的需求（2025实战版）</a></h2></div></div><div class="post" data-channel="李锋镝的博客" data-category="" data-ts="1764223025" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.lifengdi.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">李锋镝的博客</span> &bull; <span class="date">2025-11-27</span></div>
 <h2><a href="https://www.lifengdi.com/ren-gong-zhi-neng/4599" target="_blank">Coze 创意实战：AI 让历史人物“开口说话”，一键生成自述视频全流程指南</a></h2></div></div><div class="post" data-channel="柒&#039;s Blog" data-category="" data-ts="1764211620" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/blog.52itstyle.vip" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">柒&#039;s Blog</span> &bull; <span class="date">2025-11-27</span></div>
@@ -147,8 +126,7 @@ div#wrap {
 <h2><a href="https://www.virtualizationhowto.com/2025/11/incusos-is-the-new-minimal-hypervisor-os-changing-home-labs-in-2025/" target="_blank">IncusOS Is the New Minimal Hypervisor OS Changing Home Labs in 2025</a></h2></div></div><div class="post" data-channel="老T博客" data-category="" data-ts="1764070200" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/lawtee.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">老T博客</span> &bull; <span class="date">2025-11-25</span></div>
 <h2><a href="https://lawtee.com/article/liushui-xian-gong-zuo-ti-yan/" target="_blank">在工厂流水线上班是一种什么样的体验</a></h2></div></div><div class="post" data-channel="❤️ 每天收集喜欢的开源项目" data-category="" data-ts="1764057600" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/github.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">❤️ 每天收集喜欢的开源项目</span> &bull; <span class="date">2025-11-25</span></div>
 <h2><a href="https://github.com/Owloops/updo" target="_blank">Owloops/updo: Updo 是一个用于监控网站正常运行时间和性能的命令行工具。它提供有关网站状态、响应时间、SSL 证书到期等实时指标，并带有警报通知。</a></h2></div></div><div class="post" data-channel="老T博客" data-category="" data-ts="1764046200" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/lawtee.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">老T博客</span> &bull; <span class="date">2025-11-25</span></div>
-<h2><a href="https://lawtee.com/article/fix-vercel-private-submodule-issue/" target="_blank">解决Vercel不支持私有submodule仓库构建问题</a></h2></div></div><div class="post" data-channel="Collabnix" data-category="" data-ts="1764044567" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/collabnix.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Collabnix</span> &bull; <span class="date">2025-11-25</span></div>
-<h2><a href="https://collabnix.com/what-are-pods-in-kubernetes-a-complete-guide-with-examples/" target="_blank">What Are Pods in Kubernetes? A Complete Guide with Examples</a></h2></div></div><div class="post" data-channel="❤️ 每天收集喜欢的开源项目" data-category="" data-ts="1764028800" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/github.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">❤️ 每天收集喜欢的开源项目</span> &bull; <span class="date">2025-11-25</span></div>
+<h2><a href="https://lawtee.com/article/fix-vercel-private-submodule-issue/" target="_blank">解决Vercel不支持私有submodule仓库构建问题</a></h2></div></div><div class="post" data-channel="❤️ 每天收集喜欢的开源项目" data-category="" data-ts="1764028800" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/github.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">❤️ 每天收集喜欢的开源项目</span> &bull; <span class="date">2025-11-25</span></div>
 <h2><a href="https://github.com/sobolevn/git-secret" target="_blank">sobolevn/git-secret: 是一个 Bash 工具，它将私有数据存储在 Git 仓库中。使用被允许用户的公钥加密文件，允许您信任的用户使用 PGP 和他们的私钥访问加密数据。</a></h2></div></div><div class="post" data-channel="二丫讲梵" data-category="" data-ts="1764025018" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/wiki.eryajf.net" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">二丫讲梵</span> &bull; <span class="date">2025-11-24</span></div>
 <h2><a href="https://wiki.eryajf.net/pages/9a8000/" target="_blank">整理一些我的运维常用利器，一定有你用得上的</a></h2></div></div><div class="post" data-channel="❤️ 每天收集喜欢的开源项目" data-category="" data-ts="1764000000" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/github.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">❤️ 每天收集喜欢的开源项目</span> &bull; <span class="date">2025-11-24</span></div>
 <h2><a href="https://github.com/arpxspace/smartcommit" target="_blank">arpxspace/smartcommit: smartcommit 是一款智能的、基于 AI 的 CLI 工具，帮助您轻松编写语义化的 Conventional Commits 消息。它会分析您的暂存更改，通过提问澄清问题来理解代码背后的“原因”，并为您生成结构化的提交消息。</a></h2></div></div><div class="post" data-channel="史蒂夫说" data-category="" data-ts="1763999100" data-audio="1"><div class="leftpan"><img src="https://toolb.cn/favicon/steveshuo.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">史蒂夫说</span> &bull; <span class="date">2025-11-24</span></div>
@@ -157,11 +135,8 @@ div#wrap {
 <h2><a href="https://www.virtualizationhowto.com/2025/11/complete-guide-to-proxmox-containers-in-2025-docker-vms-lxc-and-new-oci-support/" target="_blank">Complete Guide to Proxmox Containers in 2025: Docker VMs, LXC, and New OCI Support</a></h2></div></div><div class="post" data-channel="Ops doesn&#039;t need to work overtime~" data-category="" data-ts="1763971080" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/nops.icu" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Ops doesn&#039;t need to work overtime~</span> &bull; <span class="date">2025-11-24</span></div>
 <h2><a href="https://nops.icu/archives/228/" target="_blank">一座大山</a></h2></div></div><div class="post" data-channel="daverupert.com" data-category="" data-ts="1763922000" data-audio="0"><div class="leftpan"><img src="https://cdn.daverupert.com/posts/2025/grid-paper.jpg" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">daverupert.com</span> &bull; <span class="date">2025-11-23</span></div>
 <h2><a href="https://daverupert.com/2025/11/grid-paper/" target="_blank">Grid Paper</a></h2></div></div><div class="post" data-channel="拾月" data-category="" data-ts="1763905800" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.skyue.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">拾月</span> &bull; <span class="date">2025-11-23</span></div>
-<h2><a href="https://www.skyue.com/25112321.html" target="_blank">微言小义（2025.10）</a></h2></div></div><div class="post" data-channel="Collabnix" data-category="" data-ts="1763882527" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/collabnix.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Collabnix</span> &bull; <span class="date">2025-11-23</span></div>
-<h2><a href="https://collabnix.com/kubecost-3-0-is-here-a-major-architectural-shift-for-kubernetes-cost-management/" target="_blank">Kubecost 3.0 is Here: A Major Architectural Shift for Kubernetes Cost Management</a></h2></div></div><div class="post" data-channel="云心怀鹤" data-category="" data-ts="1763878320" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/bluehe.cn" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">云心怀鹤</span> &bull; <span class="date">2025-11-23</span></div>
-<h2><a href="https://bluehe.cn/archives/damingshan-mode" target="_blank">一条盘山路：把呼吸调成“大明山模式”</a></h2></div></div><div class="post" data-channel="Collabnix" data-category="" data-ts="1763837945" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/collabnix.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Collabnix</span> &bull; <span class="date">2025-11-22</span></div>
-<h2><a href="https://collabnix.com/devsecops-guide-ci-cd-for-secure-pdf-microservices/" target="_blank">DevSecOps Guide: CI/CD for Secure PDF Microservices</a></h2></div></div><div class="post" data-channel="Collabnix" data-category="" data-ts="1763834823" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/collabnix.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Collabnix</span> &bull; <span class="date">2025-11-22</span></div>
-<h2><a href="https://collabnix.com/why-quick-play-mobile-games-are-defining-modern-downtime/" target="_blank">Why Quick Play Mobile Games Are Defining Modern Downtime</a></h2></div></div><div class="post" data-channel="Derek Seaman&#039;s Tech Blog" data-category="" data-ts="1763830938" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.derekseaman.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Derek Seaman&#039;s Tech Blog</span> &bull; <span class="date">2025-11-22</span></div>
+<h2><a href="https://www.skyue.com/25112321.html" target="_blank">微言小义（2025.10）</a></h2></div></div><div class="post" data-channel="云心怀鹤" data-category="" data-ts="1763878320" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/bluehe.cn" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">云心怀鹤</span> &bull; <span class="date">2025-11-23</span></div>
+<h2><a href="https://bluehe.cn/archives/damingshan-mode" target="_blank">一条盘山路：把呼吸调成“大明山模式”</a></h2></div></div><div class="post" data-channel="Derek Seaman&#039;s Tech Blog" data-category="" data-ts="1763830938" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.derekseaman.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Derek Seaman&#039;s Tech Blog</span> &bull; <span class="date">2025-11-22</span></div>
 <h2><a href="https://www.derekseaman.com/2025/11/home-assistant-hacking-your-echo-show-5-and-8.html" target="_blank">Home Assistant: The Complete Echo Show Jailbreak Guide</a></h2></div></div><div class="post" data-channel="云心怀鹤" data-category="" data-ts="1763734260" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/bluehe.cn" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">云心怀鹤</span> &bull; <span class="date">2025-11-21</span></div>
 <h2><a href="https://bluehe.cn/archives/jin-chahua-park" target="_blank">南宁视角：金茶花低语</a></h2></div></div><div class="post" data-channel="Virtualization Howto" data-category="" data-ts="1763730416" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.virtualizationhowto.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Virtualization Howto</span> &bull; <span class="date">2025-11-21</span></div>
 <h2><a href="https://www.virtualizationhowto.com/2025/11/15-troubleshooting-commands-every-linux-home-lab-admin-should-know/" target="_blank">15 Troubleshooting Commands Every Linux Home Lab Admin Should Know</a></h2></div></div><div class="post" data-channel="卡瓦邦噶！" data-category="" data-ts="1763710780" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.kawabangga.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">卡瓦邦噶！</span> &bull; <span class="date">2025-11-21</span></div>
@@ -510,7 +485,7 @@ div#wrap {
 <h2><a href="https://www.pkguild.com/2016/05/09/a-week-of-networking-celebration-at-onug-with-tech-field-day-onug-onugspring16-tfdx-sdwan-ciscochampion/" target="_blank">A week of Networking Celebration at ONUG with Tech Field Day! #ONUG #ONUGSpring16 #TFDx #SDWAN #CiscoChampion</a></h2></div></div><div class="post" data-channel="Christopher Kusek, Technology Evangelist" data-category="" data-ts="1462204800" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.pkguild.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Christopher Kusek, Technology Evangelist</span> &bull; <span class="date">2016-5-2</span></div>
 <h2><a href="https://www.pkguild.com/2016/05/02/emc-announces-unity-something-something-sliced-bread-emcworld-vexpert-emcelect/" target="_blank">EMC Announces Unity! Something something sliced bread! #EMCWorld #vExpert #EMCElect</a></h2></div></div>
 </div>
-
+    </div>
 <div id="floating_player">
 <div class="player_meta">
     <!-- === 使用新的HTML结构来配合CSS布局 === -->
@@ -557,3 +532,20 @@ div#wrap {
 <script type="text/javascript" src="static/theme.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
