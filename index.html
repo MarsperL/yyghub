@@ -483,6 +483,7 @@ div#wrap {
 <h2><a href="https://www.pkguild.com/2017/02/24/test-trial-using-wordpress-osx-app-for-blog-writing/" target="_blank">Test Trial using WordPress OSX App for Blog Writing!</a></h2></div></div><div class="post" data-channel="Christopher Kusek, Technology Evangelist" data-category="" data-ts="1462827681" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.pkguild.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Christopher Kusek, Technology Evangelist</span> &bull; <span class="date">2016-5-9</span></div>
 <h2><a href="https://www.pkguild.com/2016/05/09/a-week-of-networking-celebration-at-onug-with-tech-field-day-onug-onugspring16-tfdx-sdwan-ciscochampion-2/" target="_blank">A week of Networking Celebration at ONUG with Tech Field Day! #ONUG #ONUGSpring16 #TFDx #SDWAN #CiscoChampion</a></h2></div></div><div class="post" data-channel="Christopher Kusek, Technology Evangelist" data-category="" data-ts="1462827545" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.pkguild.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Christopher Kusek, Technology Evangelist</span> &bull; <span class="date">2016-5-9</span></div>
 <h2><a href="https://www.pkguild.com/2016/05/09/a-week-of-networking-celebration-at-onug-with-tech-field-day-onug-onugspring16-tfdx-sdwan-ciscochampion/" target="_blank">A week of Networking Celebration at ONUG with Tech Field Day! #ONUG #ONUGSpring16 #TFDx #SDWAN #CiscoChampion</a></h2></div></div><div class="post" data-channel="Christopher Kusek, Technology Evangelist" data-category="" data-ts="1462204800" data-audio="0"><div class="leftpan"><img src="https://toolb.cn/favicon/www.pkguild.com" loading="lazy"/></div><div class="rightpan"><div class="feedname"><span class="channel">Christopher Kusek, Technology Evangelist</span> &bull; <span class="date">2016-5-2</span></div>
+
 <h2><a href="https://www.pkguild.com/2016/05/02/emc-announces-unity-something-something-sliced-bread-emcworld-vexpert-emcelect/" target="_blank">EMC Announces Unity! Something something sliced bread! #EMCWorld #vExpert #EMCElect</a></h2></div></div>
 </div>
 
@@ -520,6 +521,17 @@ div#wrap {
     </svg> 
   </div>
 </div>
+<script>
+  // 记录页面访问
+  fetch('https://yyg.js.cool/analytics-tool/api/track', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      page: window.location.href,
+      referrer: document.referrer
+    })
+  });
+</script>
 <script type="text/javascript" src="static/theme.js"></script>
 </body>
 </html>
